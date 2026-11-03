@@ -1,0 +1,1349 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Alium</title>
+<meta name="description" content="Alium is a certified women-owned and black-owned specialist recruitment company connecting exceptional people in Technology, Data and Healthcare with ambitious companies across the UK, Netherlands, US and South Africa.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@100..112,400..800&family=Hanken+Grotesk:wght@400;500;600&family=Newsreader:ital,opsz,wght@1,6..72,300..400&display=swap">
+<meta property="og:title" content="Alium · Specialist recruitment">
+<meta property="og:type" content="website">
+<link rel="canonical" href="https://www.aliumc.com/">
+<style>
+/* Layout concept: a light, cinematic corporate site in charcoal, royal blue and tangerine. A fixed 3D "stage" of soft forms sits behind
+   every page and moves at different depths as you scroll and move the pointer; out-of-focus layers are blurred
+   (depth of field). Content floats above it in layers that drift at their own speeds. Deliberately single-theme. */
+:root{
+  color-scheme:light;
+  --charcoal:#21232E; --royal:#105BFF; --tangerine:#FE8500;
+  --bg:#F4F5F8; --surface:rgba(255,255,255,.78); --fg:#21232E; --muted:#5C6070; --line:rgba(33,35,46,.12);
+  --accent:#105BFF; --accent-fg:#FFFFFF; --accent-text:#0F52E6; --rose:#FE8500; --rose-deep:#21232E;
+  --ink:rgba(226,231,242,.6); --ink-2:#F4F5F8; --ink-fg:#21232E; --ink-muted:#5C6070; --ink-line:rgba(33,35,46,.12);
+  --cocoa:#21232E;
+  --ok:#2F6B47; --err:#A3321F;
+  --f-display:"Archivo","Helvetica Neue",Arial,sans-serif;
+  --f-body:"Hanken Grotesk","Helvetica Neue",Arial,sans-serif;
+  --f-quote:"Newsreader",Georgia,serif;
+  --t-hero:clamp(3.4rem,9.2vw,9.6rem); --t-xxl:clamp(2.6rem,6.4vw,6.2rem); --t-xl:clamp(2rem,4.2vw,3.9rem);
+  --t-l:clamp(1.4rem,2.2vw,2rem); --t-body:1.0625rem; --t-s:.875rem; --t-label:.74rem;
+  --ease:cubic-bezier(.22,.61,.12,1);
+  --gut:max(clamp(16px,4.4vw,72px), env(safe-area-inset-left,0px));
+  --gut-r:max(clamp(16px,4.4vw,72px), env(safe-area-inset-right,0px));
+}
+
+*,*::before,*::after{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{background:var(--bg);color:var(--fg);font-family:var(--f-body);font-size:var(--t-body);line-height:1.62;overflow-x:hidden;-webkit-font-smoothing:antialiased}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:60;background:var(--bg)}
+a{color:inherit}
+canvas{display:block;max-width:100%}
+h1,h2,h3,h4{margin:0;font-family:var(--f-display);font-weight:650;font-stretch:100%;line-height:.98;letter-spacing:-.03em;text-wrap:balance}
+p{margin:0}
+ul,ol{margin:0;padding:0;list-style:none}
+:focus-visible{outline:2px solid var(--accent-text);outline-offset:3px;border-radius:2px}
+.ink :focus-visible{outline-color:var(--accent)}
+h1[tabindex="-1"]:focus,main:focus{outline:none}
+::selection{background:var(--accent);color:#fff}
+.sr{position:absolute!important;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.skip{position:fixed;left:16px;top:-80px;z-index:100;background:var(--accent);color:#fff;padding:10px 16px;text-decoration:none;font-weight:600}
+.skip:focus{top:calc(12px + env(safe-area-inset-top,0px))}
+
+.wrap{max-width:1440px;margin:0 auto;padding-left:var(--gut);padding-right:var(--gut-r)}
+.eyebrow{font-size:var(--t-label);font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);display:flex;align-items:center;gap:12px}
+.eyebrow::before{content:"";width:24px;height:2px;background:var(--tangerine)}
+.muted{color:var(--muted)}
+.lede{font-size:clamp(1.12rem,1.45vw,1.32rem);line-height:1.55;max-width:46ch}
+.prose{max-width:64ch}
+.prose p+p{margin-top:1em}
+.pad{padding-block:clamp(80px,11vw,160px)}
+.pad-s{padding-block:clamp(56px,7vw,104px)}
+section{position:relative}
+.ink{background:var(--ink);color:var(--ink-fg);--surface:rgba(255,255,255,.75)}
+.cocoa{background:var(--cocoa);color:#EEF0F5;--fg:#EEF0F5;--bg:var(--cocoa);--muted:#A4A8B7;--line:rgba(238,240,245,.14);--ink-fg:#EEF0F5;--ink-muted:#A4A8B7;--ink-line:rgba(238,240,245,.14);--accent:#FE8500;--accent-fg:#21232E;--accent-text:#FE8500}
+.cocoa .btn.primary:hover{background:var(--royal);border-color:var(--royal);color:#fff}
+main,.ftr{position:relative;z-index:1}
+.hero.ink{background:transparent}
+/* Depth stage */
+.stage{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden;perspective:1100px}
+.stage-in{position:absolute;inset:0;transform-style:preserve-3d;will-change:transform}
+.orb,.ring{position:absolute;left:0;top:0;border-radius:50%;will-change:transform}
+.ring{border:1px solid rgba(33,35,46,.22)}
+.layer{position:absolute;inset:0;will-change:transform;pointer-events:none}
+.lorb{position:absolute;border-radius:50%;animation:float 16s ease-in-out infinite alternate}
+@keyframes float{0%{transform:translate3d(0,0,0) scale(1)}35%{transform:translate3d(5vw,-4vh,0) scale(1.1)}70%{transform:translate3d(-3vw,3vh,0) scale(.94)}100%{transform:translate3d(2vw,-2vh,0) scale(1.04)}}
+.surface{background:var(--surface)}
+.h2{font-size:var(--t-xl);max-width:18ch}
+.head{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-end;gap:24px 48px;margin-bottom:clamp(40px,5vw,72px)}
+.head .eyebrow{margin-bottom:22px}
+
+/* Buttons */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:12px;min-height:54px;padding:0 26px;font:600 .94rem/1 var(--f-body);letter-spacing:.01em;text-decoration:none;border-radius:2px;border:1px solid currentColor;background:transparent;color:inherit;cursor:pointer;transition:background-color .35s var(--ease),color .35s var(--ease),border-color .35s var(--ease)}
+.btn:hover{background:var(--fg);color:var(--bg);border-color:var(--fg)}
+.btn.primary{background:var(--accent);border-color:var(--accent);color:#fff}
+.btn.primary:hover{background:var(--charcoal);border-color:var(--charcoal);color:#fff}
+.arrow{width:16px;height:16px;flex:none;transition:transform .4s var(--ease)}
+.btn:hover .arrow,.link:hover .arrow,.row:hover .arrow{transform:translateX(4px)}
+.link{display:inline-flex;align-items:center;gap:10px;font-weight:600;text-decoration:none;padding-bottom:3px;background:linear-gradient(currentColor,currentColor) 0 100%/100% 1px no-repeat;transition:background-size .45s var(--ease)}
+.link:hover{background-size:0 1px;background-position:100% 100%}
+.ext::after{content:"↗";font-size:.8em;margin-left:3px}
+
+/* Header */
+.hdr{position:fixed;top:0;left:0;right:0;z-index:50;padding-top:env(safe-area-inset-top,0px);color:var(--fg);transition:background-color .4s,color .4s,transform .5s var(--ease),border-color .4s;border-bottom:1px solid transparent}
+.hdr .wrap{display:flex;align-items:center;gap:28px;height:76px}
+.hdr[data-tone="dark"]{color:var(--ink-fg)}
+.hdr[data-tone="deep"]{color:#EEF0F5}
+.hdr[data-solid="true"]{background:color-mix(in srgb,var(--bg) 90%,transparent);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border-color:var(--line)}
+.hdr[data-solid="true"][data-tone="dark"]{background:color-mix(in srgb,var(--ink) 86%,transparent);border-color:var(--ink-line)}
+.hdr[data-hidden="true"]{transform:translateY(-110%)}
+.brand{display:inline-flex;align-items:center;gap:10px;text-decoration:none;font:700 1.55rem/1 var(--f-display);font-stretch:108%;letter-spacing:-.035em}
+.brand svg{width:22px;height:26px}
+.nav{display:flex;gap:2px;margin-left:auto}
+.nav a{font-size:.9rem;font-weight:500;text-decoration:none;padding:8px 13px;opacity:.78;position:relative;transition:opacity .3s}
+.nav a:hover,.nav a[aria-current="page"]{opacity:1}
+.nav a::after{content:"";position:absolute;left:13px;right:13px;bottom:2px;height:1px;background:currentColor;transform:scaleX(0);transform-origin:left;transition:transform .45s var(--ease)}
+.nav a:hover::after,.nav a[aria-current="page"]::after{transform:none}
+.hdr .btn{min-height:42px;padding:0 18px;font-size:.86rem}
+.menu-btn{display:none;margin-left:auto;background:none;border:1px solid currentColor;color:inherit;height:42px;padding:0 16px;font:600 .86rem var(--f-body);cursor:pointer;align-items:center;gap:10px;border-radius:2px}
+.menu-btn i{display:block;width:16px;height:1.5px;background:currentColor;box-shadow:0 5px 0 currentColor;transform:translateY(-2.5px)}
+@media (max-width:1080px){.nav{display:none}.menu-btn{display:inline-flex}.hdr .btn.hire{display:none}}
+
+.menu{position:fixed;inset:0;z-index:70;background:var(--ink-2);color:var(--ink-fg);display:grid;grid-template-rows:auto 1fr auto;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);opacity:0;visibility:hidden;transition:opacity .5s var(--ease),visibility 0s .5s}
+.menu.open{opacity:1;visibility:visible;transition:opacity .5s var(--ease)}
+.menu .top{display:flex;align-items:center;height:76px}
+.menu .close{margin-left:auto;background:none;border:1px solid currentColor;color:inherit;height:42px;padding:0 18px;font:600 .86rem var(--f-body);cursor:pointer;border-radius:2px}
+.menu nav{align-self:center;display:grid}
+.menu nav a{text-decoration:none;font:650 clamp(2rem,7vw,4.2rem)/1.12 var(--f-display);letter-spacing:-.03em;opacity:.55;transition:opacity .3s,transform .5s var(--ease);transform:translateY(16px)}
+.menu.open nav a{transform:none}
+.menu nav a:hover,.menu nav a[aria-current="page"]{opacity:1}
+.menu .foot{display:flex;flex-wrap:wrap;gap:12px 32px;padding-block:24px;border-top:1px solid var(--ink-line);color:var(--ink-muted);font-size:var(--t-s)}
+
+/* Views & transitions */
+.view{animation:viewIn .9s var(--ease) both}
+@keyframes viewIn{from{opacity:0}to{opacity:1}}
+.fade{position:fixed;inset:0;z-index:65;background:var(--bg);pointer-events:none;opacity:0;transition:opacity .32s var(--ease)}
+.fade.on{opacity:1}
+.rv{transition:opacity .95s var(--ease),filter .95s var(--ease)}
+.rv.pend{opacity:0;filter:blur(10px)}
+
+/* Film texture */
+.grain{position:absolute;inset:0;pointer-events:none;opacity:.05;mix-blend-mode:multiply;background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='180' height='180'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>")}
+.vignette{position:absolute;inset:0;pointer-events:none;background:radial-gradient(120% 90% at 60% 40%,transparent 40%,rgba(33,35,46,.08) 100%)}
+
+/* HERO */
+.hero{height:100svh;min-height:640px;overflow:hidden}
+.hero .bg{position:absolute;inset:-6% 0;will-change:transform}
+.hero .light{position:absolute;inset:0;background:
+  radial-gradient(42% 52% at 72% 42%,rgba(16,91,255,.2),transparent 70%),
+  radial-gradient(50% 60% at 18% 80%,rgba(254,133,0,.16),transparent 70%);animation:drift 14s ease-in-out infinite alternate}
+@keyframes drift{0%{transform:translate3d(-2%,0,0) scale(1)}100%{transform:translate3d(3%,-2%,0) scale(1.08)}}
+.hero canvas.mark{position:absolute;right:-4vw;top:50%;width:min(64vh,46vw);aspect-ratio:1;transform:translateY(-50%);opacity:.24;color:var(--ink-fg);animation:turn 240s linear infinite}
+@keyframes turn{to{transform:translateY(-50%) rotate(360deg)}}
+.letterbox::before,.letterbox::after{content:"";position:absolute;left:0;right:0;height:50%;background:var(--bg);z-index:4;animation:lb 1.7s .1s var(--ease) both}
+.letterbox::before{top:0}.letterbox::after{bottom:0}
+@keyframes lb{to{height:0}}
+.hero-in{position:absolute;inset:0;z-index:3;display:flex;flex-direction:column;justify-content:flex-end;padding-bottom:max(28px,env(safe-area-inset-bottom,0px));will-change:transform,opacity}
+.hero .eyebrow{margin-bottom:28px;animation:up 1.2s 1.1s var(--ease) both}
+.hero h1{font-size:var(--t-hero);font-weight:680;letter-spacing:-.045em;line-height:.9;max-width:11ch}
+.hero h1 .ln{display:block;overflow:hidden;padding-bottom:.05em}
+.hero h1 .ln>span{display:inline-block;animation:rise 1.4s var(--ease) both}
+.hero h1 .ln:nth-child(1)>span{animation-delay:1.15s}.hero h1 .ln:nth-child(2)>span{animation-delay:1.3s}
+@keyframes rise{from{transform:translateY(105%)}to{transform:none}}
+@keyframes up{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:none}}
+.hero-sub{margin-top:28px;display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:28px 48px;animation:up 1.2s 1.5s var(--ease) both}
+.hero-sub p{font-size:clamp(1.1rem,1.6vw,1.45rem);line-height:1.4;max-width:30ch;color:color-mix(in srgb,var(--ink-fg) 86%,transparent)}
+.rot{display:inline-grid;vertical-align:bottom;color:var(--royal);font-weight:600}
+.rot span{grid-area:1/1;transition:opacity .8s var(--ease),transform .8s var(--ease);white-space:nowrap}
+.rot span:not(.on){opacity:0;transform:translateY(30%);transition-duration:.4s}
+.paths{display:flex;flex-wrap:wrap;gap:12px}
+.hero-foot{display:grid;grid-template-columns:repeat(3,minmax(0,1fr)) auto;margin-top:clamp(36px,6vh,72px);border-top:1px solid var(--ink-line);animation:up 1.2s 1.7s var(--ease) both}
+.hero-foot a{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:18px 20px 4px 0;text-decoration:none;color:var(--ink-muted);font-size:.92rem;transition:color .3s}
+.hero-foot a+a{padding-left:20px;border-left:1px solid var(--ink-line)}
+.hero-foot a:hover{color:var(--ink-fg)}
+.hero-foot a b{color:var(--ink-fg);font-weight:600;margin-right:10px}
+.hero-foot .scroll{display:flex;align-items:center;gap:10px;padding:18px 0 4px 20px;color:var(--ink-muted);font-size:.8rem;letter-spacing:.14em;text-transform:uppercase}
+.hero-foot .scroll i{width:1px;height:26px;background:linear-gradient(var(--ink-fg),transparent);animation:cue 2.4s infinite var(--ease)}
+@keyframes cue{0%{transform:scaleY(0);transform-origin:top}50%{transform:scaleY(1);transform-origin:top}51%{transform-origin:bottom}100%{transform:scaleY(0);transform-origin:bottom}}
+@media (max-width:820px){.hero-foot{grid-template-columns:1fr}.hero-foot a+a{border-left:0;padding-left:0;border-top:1px solid var(--ink-line)}.hero-foot a{padding:14px 0}.hero-foot .scroll{display:none}.hero canvas.mark{width:90vw;right:-35vw;top:30%;opacity:.1}}
+
+/* Statement & figures */
+.split{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(32px,7vw,128px)}
+@media (max-width:880px){.split{grid-template-columns:1fr}}
+.statement{font:600 clamp(1.8rem,3.6vw,3.3rem)/1.12 var(--f-display);letter-spacing:-.03em;max-width:20ch}
+.creds{display:flex;flex-wrap:wrap;gap:10px;margin-top:28px}
+.cred{display:inline-flex;align-items:center;gap:10px;padding:10px 16px;border:1px solid var(--line);font-size:var(--t-s);font-weight:600}
+.cred svg{width:14px;height:14px;color:var(--accent-text)}
+.figs{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));border-top:1px solid var(--line);margin-top:clamp(56px,8vw,112px)}
+.fig{padding:30px 24px 0 0}
+.fig+.fig{padding-left:24px;border-left:1px solid var(--line)}
+.fig b{display:block;font:600 clamp(2.8rem,5.6vw,5.2rem)/1 var(--f-display);letter-spacing:-.04em;font-variant-numeric:tabular-nums}
+.fig span{display:block;margin-top:12px;color:var(--muted);font-size:.95rem;max-width:22ch}
+@media (max-width:760px){.figs{grid-template-columns:1fr 1fr}.fig:nth-child(3){padding-left:0;border-left:0}.fig:nth-child(n+3){border-top:1px solid var(--line);margin-top:24px}}
+
+/* Plates (expertise) */
+.plate{min-height:min(88vh,860px);overflow:hidden;display:flex;align-items:flex-end;isolation:isolate}
+.plate+.plate{border-top:1px solid var(--ink-line)}
+.plate-bg{position:absolute;inset:-12% 0;z-index:-1;will-change:transform}
+.plate-bg .tint{position:absolute;inset:0;transition:transform 8s var(--ease);transform:scale(1.08)}
+.plate.in .plate-bg .tint{transform:scale(1)}
+.tone-steel .tint{background:radial-gradient(60% 70% at 78% 30%,rgba(16,91,255,.26) 0%,transparent 70%)}
+.tone-blue .tint{background:radial-gradient(60% 70% at 22% 30%,rgba(33,35,46,.16) 0%,transparent 70%)}
+.tone-amber .tint{background:radial-gradient(60% 70% at 78% 35%,rgba(254,133,0,.28) 0%,transparent 70%)}
+.plate-bg canvas{position:absolute;width:min(78vh,60vw);aspect-ratio:1;top:50%;right:4vw;transform:translateY(-50%);opacity:.12;color:var(--ink-fg)}
+.tone-blue .plate-bg canvas{right:auto;left:4vw}
+.plate-bg img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.plate-in{width:100%;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(32px,6vw,112px);padding-block:clamp(72px,10vw,140px);align-items:end}
+.plate h3{font-size:clamp(3.2rem,8vw,8rem);font-weight:650;letter-spacing:-.05em;line-height:.88;margin-top:22px}
+.plate .lede{color:color-mix(in srgb,var(--ink-fg) 86%,transparent)}
+.specs{display:grid;grid-template-columns:1fr 1fr;gap:0 28px;margin:30px 0 34px;border-top:1px solid var(--ink-line)}
+.specs li{padding:13px 0;border-bottom:1px solid var(--ink-line);font-weight:500;font-size:.98rem}
+.acts{display:flex;flex-wrap:wrap;gap:14px 28px;align-items:center}
+@media (max-width:900px){.plate-in{grid-template-columns:1fr;align-items:start}.plate{min-height:0}}
+@media (max-width:480px){.specs{grid-template-columns:1fr}}
+.also{display:flex;flex-wrap:wrap;align-items:center;gap:14px 30px;padding-block:30px;border-top:1px solid var(--line)}
+.also strong{font:600 clamp(1.15rem,2vw,1.6rem) var(--f-display);letter-spacing:-.02em}
+
+/* Models */
+.models{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(12px,1.6vw,24px)}
+.model{background:var(--surface);border:1px solid var(--line);padding:clamp(24px,2.6vw,40px);display:flex;flex-direction:column;gap:18px;transition:border-color .4s,transform .6s var(--ease)}
+.model:hover{border-color:color-mix(in srgb,var(--fg) 40%,transparent);transform:translateY(-4px)}
+.model.featured{background:var(--charcoal);color:#EEF0F5;--muted:#A4A8B7;--line:rgba(238,240,245,.14);--fg:#EEF0F5;--bg:var(--charcoal);--accent:#FE8500;--accent-fg:#21232E;--rose:#FE8500;border-color:var(--charcoal)}
+.model.featured .btn.primary:hover{background:var(--royal);border-color:var(--royal);color:#fff}
+.model h3{font-size:clamp(2.2rem,3.6vw,3.2rem)}
+.model .for{font-weight:600;font-size:1.05rem}
+.model p{color:var(--muted)}
+.ticks li{display:flex;gap:12px;padding:11px 0;border-top:1px solid var(--line);font-size:.95rem}
+.ticks li::before{content:"";flex:none;width:12px;height:1px;margin-top:.8em;background:var(--rose)}
+.model .btn{margin-top:auto;align-self:flex-start}
+@media (max-width:960px){.models{grid-template-columns:1fr}}
+.steps{counter-reset:s;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:0 clamp(20px,3vw,48px)}
+.steps li{counter-increment:s;border-top:1px solid var(--line);padding:24px 0 32px;display:grid;gap:10px}
+.steps li::before{content:counter(s,decimal-leading-zero);font-size:var(--t-label);font-weight:600;letter-spacing:.14em;color:var(--accent-text)}
+.steps b{font:600 1.3rem/1.15 var(--f-display);letter-spacing:-.015em}
+.steps span{color:var(--muted);font-size:.96rem}
+@media (max-width:860px){.steps{grid-template-columns:1fr}}
+
+/* Values */
+.values{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));border-top:1px solid var(--line)}
+.value{padding:30px clamp(16px,2.6vw,40px) 6px 0}
+.value+.value{padding-left:clamp(16px,2.6vw,40px);border-left:1px solid var(--line)}
+.value h3{font-size:clamp(1.9rem,3vw,2.8rem);margin:14px 0 16px}
+.value p{color:var(--muted);max-width:34ch}
+.value .n{font-size:var(--t-label);font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--accent-text)}
+@media (max-width:860px){.values{grid-template-columns:1fr}.value,.value+.value{padding-left:0;border-left:0;border-bottom:1px solid var(--line);padding-bottom:26px}}
+
+/* People */
+.people{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:clamp(12px,1.6vw,24px)}
+.portrait{position:relative;aspect-ratio:4/5;max-width:100%;overflow:hidden;background:var(--ink);color:var(--ink-fg)}
+.portrait .tint{position:absolute;inset:0;background:radial-gradient(70% 60% at 50% 30%,#FFFFFF,transparent 70%),linear-gradient(180deg,#E4E8F1,#C8CFDE);transition:transform 1.4s var(--ease)}
+.person:hover .portrait .tint{transform:scale(1.06)}
+.portrait .ini{position:absolute;left:20px;bottom:16px;font:600 clamp(2.4rem,4vw,3.6rem)/1 var(--f-display);letter-spacing:-.04em;opacity:.9}
+.portrait .tbc{position:absolute;right:16px;top:16px;font-size:.66rem;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-muted)}
+.person h3{font-size:1.35rem;margin-top:18px;letter-spacing:-.02em}
+.person .role{color:var(--muted);margin-top:6px}
+.person .mail{margin-top:10px;font-size:.88rem;user-select:all;color:var(--muted)}
+@media (max-width:900px){.people{grid-template-columns:repeat(2,minmax(0,1fr))}}
+
+/* Quotes */
+.quotes{display:grid;grid-template-columns:minmax(0,1.5fr) minmax(0,1fr);gap:clamp(40px,7vw,120px);align-items:start}
+.qmain p{font:300 clamp(1.6rem,3.1vw,2.9rem)/1.2 var(--f-quote);font-style:italic;letter-spacing:-.01em;max-width:28ch}
+.qmain::before{content:"“";display:block;font:300 clamp(4.5rem,8vw,7rem)/.5 var(--f-quote);color:var(--rose);margin-bottom:.15em}
+.attrib{margin-top:30px;display:grid;gap:2px}
+.attrib b{font-weight:600}
+.attrib small{color:var(--muted);font-size:var(--t-s)}
+.qside{display:grid;gap:40px}
+.qside blockquote{margin:0;border-top:1px solid var(--line);padding-top:24px}
+.qside blockquote p{font:400 clamp(1.05rem,1.3vw,1.22rem)/1.5 var(--f-quote);font-style:italic}
+.tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+.tags span{font-size:.82rem;padding:6px 12px;border:1px solid var(--line)}
+@media (max-width:900px){.quotes{grid-template-columns:1fr}}
+
+/* Offices */
+.offices{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));border-top:1px solid var(--line)}
+.office{padding:26px clamp(14px,2vw,28px) 6px 0;display:grid;gap:10px;align-content:start}
+.office+.office{padding-left:clamp(14px,2vw,28px);border-left:1px solid var(--line)}
+.office .city{font:600 clamp(1.5rem,2.4vw,2.1rem)/1 var(--f-display);letter-spacing:-.025em}
+.office .clock{font:500 clamp(2rem,3.4vw,3rem)/1 var(--f-display);font-variant-numeric:tabular-nums;letter-spacing:-.02em}
+.office .clock small{font:600 .66rem var(--f-body);letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin-left:10px;vertical-align:middle}
+.office address{font-style:normal;color:var(--muted);font-size:var(--t-s);line-height:1.5}
+.office .tel{font-size:.9rem;user-select:all;font-variant-numeric:tabular-nums}
+@media (max-width:900px){.offices{grid-template-columns:1fr 1fr}.office:nth-child(3){padding-left:0;border-left:0}.office:nth-child(n+3){border-top:1px solid var(--line);margin-top:20px}}
+@media (max-width:480px){.offices{grid-template-columns:1fr}.office,.office+.office{padding-left:0;border-left:0;border-bottom:1px solid var(--line);padding-bottom:22px;margin-top:0}}
+
+/* Insights */
+.cards{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(16px,2vw,32px)}
+.card{text-decoration:none;display:grid;gap:16px;align-content:start}
+.cover{position:relative;aspect-ratio:16/10;max-width:100%;overflow:hidden;background:var(--ink);color:var(--ink-fg)}
+.cover .tint{position:absolute;inset:0;transition:transform 1.4s var(--ease)}
+.cover canvas{position:absolute;width:80%;aspect-ratio:1;right:-14%;top:50%;transform:translateY(-50%);opacity:.18}
+.card:hover .cover .tint{transform:scale(1.06)}
+.cover .tag{position:absolute;left:18px;bottom:16px;font-size:.7rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-fg)}
+.meta{display:flex;gap:14px;color:var(--muted);font-size:.84rem}
+.card h3{font-size:clamp(1.25rem,1.7vw,1.6rem);letter-spacing:-.02em;line-height:1.12;transition:color .3s}
+.card:hover h3{color:var(--accent-text)}
+.card p{color:var(--muted);font-size:.96rem;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
+@media (max-width:900px){.cards{grid-template-columns:1fr}}
+
+/* Fork */
+.fork{display:grid;grid-template-columns:1fr 1fr}
+.fork a{position:relative;display:flex;flex-direction:column;justify-content:space-between;gap:56px;min-height:min(62vh,560px);padding:clamp(32px,5vw,80px) var(--gut-r) clamp(32px,5vw,72px) var(--gut);text-decoration:none;overflow:hidden;isolation:isolate}
+.fork a+a{padding-left:clamp(32px,5vw,80px);border-left:1px solid var(--ink-line)}
+.fork a::before{content:"";position:absolute;inset:0;z-index:-1;background:radial-gradient(70% 80% at 30% 100%,rgba(16,91,255,.16),transparent 70%);opacity:0;transition:opacity .8s var(--ease)}
+.fork a:hover::before{opacity:1}
+.fork b{font:650 clamp(2.4rem,5.2vw,5rem)/.95 var(--f-display);letter-spacing:-.045em;max-width:10ch}
+.fork .go{display:flex;justify-content:space-between;align-items:center;color:var(--ink-muted)}
+.fork .go svg{width:clamp(36px,4vw,56px);height:auto;color:var(--ink-fg);transition:transform .6s var(--ease)}
+.fork a:hover .go svg{transform:translateX(10px)}
+@media (max-width:760px){.fork{grid-template-columns:1fr}.fork a+a{border-left:0;border-top:1px solid var(--ink-line);padding-left:var(--gut)}.fork a{min-height:320px}}
+
+/* Footer */
+.ftr{padding-top:clamp(64px,9vw,120px);padding-bottom:max(28px,env(safe-area-inset-bottom,0px))}
+.fcols{display:grid;grid-template-columns:1.4fr repeat(3,minmax(0,1fr));gap:40px 32px}
+.fcols h4{font:600 var(--t-label) var(--f-body);letter-spacing:.16em;text-transform:uppercase;color:var(--ink-muted);margin-bottom:16px}
+.fcols li{margin-bottom:8px}
+.fcols a{text-decoration:none;opacity:.86}
+.fcols a:hover{opacity:1}
+.fstate{font:600 clamp(1.5rem,2.6vw,2.3rem)/1.1 var(--f-display);letter-spacing:-.03em;max-width:18ch}
+.wordmark{display:block;font:700 clamp(5rem,22vw,22rem)/.78 var(--f-display);font-stretch:108%;letter-spacing:-.06em;margin:clamp(56px,8vw,120px) 0 0 -.04em;color:transparent;-webkit-text-stroke:1px var(--ink-line);user-select:none;white-space:nowrap;overflow:hidden}
+.legal{display:flex;flex-wrap:wrap;gap:10px 22px;justify-content:space-between;border-top:1px solid var(--ink-line);padding-top:22px;font-size:.84rem;color:var(--ink-muted)}
+.legal nav{display:flex;flex-wrap:wrap;gap:8px 18px}
+.legal a{text-decoration:none}
+.legal a:hover{color:var(--ink-fg)}
+@media (max-width:860px){.fcols{grid-template-columns:1fr 1fr}.fcols>div:first-child{grid-column:1/-1}}
+
+/* Inner page heads */
+.phead{overflow:hidden;padding-top:calc(160px + env(safe-area-inset-top,0px));padding-bottom:clamp(64px,8vw,120px)}
+.phead .bg{position:absolute;inset:0;background:radial-gradient(50% 70% at 82% 20%,rgba(16,91,255,.16),transparent 70%),radial-gradient(50% 60% at 10% 100%,rgba(254,133,0,.13),transparent 70%);animation:drift 30s ease-in-out infinite alternate}
+.phead canvas.mark{position:absolute;right:-8vw;top:50%;width:min(70vh,52vw);aspect-ratio:1;transform:translateY(-50%);opacity:.1;color:var(--ink-fg);animation:turn 300s linear infinite}
+.phead .wrap{position:relative;z-index:2}
+.crumb{display:flex;gap:10px;font-size:.84rem;color:var(--ink-muted);margin-bottom:clamp(26px,3vw,44px)}
+.crumb a{text-decoration:none}
+.crumb a:hover{color:var(--ink-fg)}
+.phead h1{font-size:var(--t-xxl);letter-spacing:-.045em;line-height:.92;max-width:15ch}
+.phead h1 .w{display:inline-block;overflow:hidden;vertical-align:top;padding-bottom:.06em;margin-bottom:-.06em}
+.phead h1 .w>span{display:inline-block;animation:rise 1.2s var(--ease) both;animation-delay:calc(var(--i,0)*70ms + .1s)}
+.phead .lede{margin-top:clamp(24px,3vw,40px);color:color-mix(in srgb,var(--ink-fg) 78%,transparent);animation:up 1.1s .45s var(--ease) both}
+
+/* Industries */
+.inds{display:flex;flex-wrap:wrap;gap:10px}
+.inds li{padding:12px 20px;border:1px solid var(--line);font:600 1.05rem var(--f-display);letter-spacing:-.01em}
+
+/* Benefits */
+.benefits{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0 clamp(24px,4vw,64px)}
+.benefits li{display:flex;justify-content:space-between;align-items:baseline;gap:16px;padding:20px 0;border-bottom:1px solid var(--line);font:600 clamp(1.1rem,1.7vw,1.45rem)/1.2 var(--f-display);letter-spacing:-.015em}
+.benefits li span{font:600 var(--t-label) var(--f-body);letter-spacing:.14em;text-transform:uppercase;color:var(--muted);flex:none}
+@media (max-width:760px){.benefits{grid-template-columns:1fr}}
+
+/* Jobs */
+.search{display:grid;grid-template-columns:minmax(0,1.4fr) minmax(0,1fr) minmax(0,.6fr) auto;background:var(--surface);border:1px solid var(--line);box-shadow:0 40px 80px -40px rgba(33,35,46,.3)}
+.search .fld{display:grid;padding:16px 20px;border-right:1px solid var(--line);min-width:0}
+.search label{font-size:var(--t-label);font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+.search input,.search select{border:0;background:transparent;color:var(--fg);font:500 1.1rem var(--f-body);padding:6px 0 2px;min-width:0;width:100%}
+.search input:focus,.search select:focus{outline:none}
+.search .fld:focus-within{box-shadow:inset 0 -2px 0 var(--accent)}
+.search .btn{border-radius:0;min-height:76px}
+@media (max-width:900px){.search{grid-template-columns:1fr 1fr}.search .fld:first-child{grid-column:1/-1;border-right:0;border-bottom:1px solid var(--line)}.search .fld:nth-child(3){border-right:0}.search .btn{grid-column:1/-1}}
+.filters{display:flex;flex-wrap:wrap;gap:10px;margin-top:22px}
+.filters button{border:1px solid var(--line);background:transparent;color:var(--fg);border-radius:2px;padding:10px 16px;font:500 .9rem var(--f-body);cursor:pointer;transition:all .3s}
+.filters button[aria-pressed="true"]{background:var(--fg);color:var(--bg);border-color:var(--fg)}
+.filters button:hover{border-color:var(--fg)}
+.result{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:24px;align-items:center;margin-top:40px;padding:32px;background:var(--surface);border:1px solid var(--line)}
+.result h3{font-size:clamp(1.4rem,2.2vw,2rem);letter-spacing:-.02em;line-height:1.1}
+.result p{color:var(--muted);margin-top:10px;max-width:56ch}
+@media (max-width:760px){.result{grid-template-columns:1fr;padding:22px}}
+.row{display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:center;gap:16px;padding:26px 0;border-bottom:1px solid var(--line);text-decoration:none}
+.row b{font:600 clamp(1.4rem,2.4vw,2.2rem)/1 var(--f-display);letter-spacing:-.03em;transition:color .3s}
+.row:hover b{color:var(--accent-text)}
+.row small{display:block;color:var(--muted);margin-top:8px;font-size:.92rem}
+
+/* Article */
+.article-body{display:grid;grid-template-columns:minmax(0,220px) minmax(0,1fr);gap:clamp(24px,5vw,80px);padding-block:clamp(56px,7vw,104px)}
+.article-body aside{position:sticky;top:110px;align-self:start;display:grid;gap:12px;color:var(--muted);font-size:.92rem}
+.article-body .prose{font-size:1.14rem;line-height:1.75}
+.article-body .prose>p:first-child{font-size:clamp(1.3rem,1.8vw,1.55rem);line-height:1.45}
+.article-body h2{font-size:clamp(1.45rem,2vw,1.85rem);margin:1.7em 0 .6em;line-height:1.1}
+.article-body ol,.article-body ul.b{margin:1em 0;padding-left:1.2em}
+.article-body ol{list-style:decimal}.article-body ul.b{list-style:disc}
+.article-body li{margin:.5em 0;padding-left:.3em}
+.article-body li::marker{color:var(--accent-text);font-weight:700}
+@media (max-width:860px){.article-body{grid-template-columns:1fr}.article-body aside{position:static}}
+
+/* Contact */
+.contact-grid{display:grid;grid-template-columns:minmax(0,1.4fr) minmax(0,1fr);gap:clamp(40px,7vw,120px)}
+@media (max-width:960px){.contact-grid{grid-template-columns:1fr}}
+.cform{display:grid;gap:22px;background:var(--surface);border:1px solid var(--line);padding:clamp(22px,3vw,44px)}
+.cform .grid2{display:grid;grid-template-columns:1fr 1fr;gap:22px}
+@media (max-width:620px){.cform .grid2{grid-template-columns:1fr}}
+.field{display:grid;gap:8px}
+.field label{font-size:var(--t-label);font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+.field input,.field textarea{width:100%;background:transparent;color:var(--fg);border:0;border-bottom:1px solid var(--line);padding:10px 0;font:500 1.08rem var(--f-body);transition:border-color .3s}
+.field textarea{min-height:110px;resize:vertical;border:1px solid var(--line);padding:12px 14px}
+.field input:focus,.field textarea:focus{outline:none;border-color:var(--accent)}
+.field input[aria-invalid="true"]{border-color:var(--err)}
+.intent{display:flex;flex-wrap:wrap;gap:10px;border:0;padding:0;margin:0}
+.intent legend{font-size:var(--t-label);font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin-bottom:12px;padding:0}
+.intent label{cursor:pointer}
+.intent input{position:absolute;opacity:0;pointer-events:none}
+.intent span{display:inline-flex;padding:11px 16px;border:1px solid var(--line);font-weight:600;font-size:.94rem;transition:all .3s}
+.intent input:checked+span{background:var(--fg);border-color:var(--fg);color:var(--bg)}
+.intent input:focus-visible+span{outline:2px solid var(--accent-text);outline-offset:3px}
+.hp{position:absolute;left:-9999px}
+.errs{color:var(--err);font-size:.95rem}
+.errs:empty{display:none}
+.handoff{border-top:1px solid var(--line);padding-top:22px;display:grid;gap:14px}
+.handoff pre{white-space:pre-wrap;font:.9rem/1.55 ui-monospace,Menlo,monospace;margin:0;max-height:260px;overflow:auto;padding:14px;background:var(--bg);border:1px solid var(--line);user-select:all}
+.handoff .row2{display:flex;flex-wrap:wrap;gap:14px;align-items:center}
+.loc{border-top:1px solid var(--line);padding:18px 0;display:grid;gap:6px}
+.loc b{font:600 1.3rem var(--f-display);letter-spacing:-.02em}
+.loc address{font-style:normal;color:var(--muted);font-size:.95rem}
+.loc .tel{font-size:.95rem;user-select:all}
+.socials{display:flex;flex-wrap:wrap;gap:10px 22px;margin-top:18px}
+
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation-duration:.001ms!important;animation-delay:0s!important;transition-duration:.001ms!important}
+  .rv.pend{opacity:1;transform:none}
+  .hero .bg,.plate-bg{transform:none!important}
+}
+</style>
+</head>
+<body>
+
+<a class="skip" href="#main">Skip to content</a>
+<div class="stage" aria-hidden="true"><div class="stage-in" id="stage"></div></div>
+
+<header class="hdr" id="hdr" data-tone="dark">
+  <div class="wrap">
+    <a class="brand" href="#home" aria-label="Alium home">
+      <svg viewBox="0 0 26 30" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><path d="M13 26c-3.5-2-5.5-6-5.5-10.5a5.5 5.5 0 0 1 11 0c0 2.5-.6 4.6-1.6 6.4"/><path d="M13 29c-6-2.6-9.6-8-9.6-13.5a9.6 9.6 0 0 1 19.2 0c0 3.8-1.2 7.4-3.2 10"/><path d="M13 22.5c-1.6-1.7-2.3-4.2-2.3-7a2.3 2.3 0 0 1 4.6 0c0 1.6-.3 3-.9 4.3"/><path d="M5.5 5.5A12.5 12.5 0 0 1 20.8 5"/></svg>
+      alium
+    </a>
+    <nav class="nav" aria-label="Main">
+      <a href="#about-us">About</a>
+      <a href="#areas-of-expertise">Expertise</a>
+      <a href="#hiring-solutions">Hiring solutions</a>
+      <a href="#vacancies">Find a job</a>
+      <a href="#join-us">Join the team</a>
+      <a href="#insights">Insights</a>
+      <a href="#contact-us">Contact</a>
+    </nav>
+    <a class="btn primary hire" href="#contact-us" data-intent="hiring">Hire talent</a>
+    <button class="menu-btn" id="menuBtn" aria-expanded="false" aria-controls="menu"><i></i>Menu</button>
+  </div>
+</header>
+
+<div class="menu" id="menu" role="dialog" aria-modal="true" aria-label="Site menu">
+  <div class="wrap top"><a class="brand" href="#home">alium</a><button class="close" id="menuClose">Close</button></div>
+  <div class="wrap"><nav aria-label="Menu">
+    <a href="#home">Home</a><a href="#about-us">About</a><a href="#areas-of-expertise">Expertise</a><a href="#hiring-solutions">Hiring solutions</a><a href="#vacancies">Find a job</a><a href="#join-us">Join the team</a><a href="#insights">Insights</a><a href="#contact-us">Contact</a>
+  </nav></div>
+  <div class="wrap"><div class="foot"><span>info@aliumc.com</span><span>UK +44 2038 548 360</span><span>US +1 3476 144 575</span><span>NL +31 154 550 028</span></div></div>
+</div>
+<div class="fade" id="fade" aria-hidden="true"></div>
+
+<main id="main" tabindex="-1">
+
+<!-- ================= HOME ================= -->
+<div class="view" data-view="home">
+  <section class="hero ink letterbox" data-band="dark" aria-labelledby="heroTitle">
+    <div class="bg" id="heroBg">
+      <div class="light"></div>
+      <canvas class="mark" data-print="2026" aria-hidden="true"></canvas>
+      <!-- PHOTO/VIDEO SLOT: a short muted film of Alium people at work can sit here (poster first, no autoplay on mobile). -->
+      <div class="vignette"></div>
+    </div>
+    <div class="grain"></div>
+    <div class="hero-in" id="heroIn"><div class="wrap">
+      <p class="eyebrow">Alium · Specialist recruitment · Technology, Data &amp; Healthcare</p>
+      <h1 id="heroTitle"><span class="ln"><span>No two</span></span> <span class="ln"><span>alike.</span></span></h1>
+      <div class="hero-sub">
+        <p>We connect exceptional <span class="rot" id="rot" aria-live="off"><span class="on">software engineers</span><span>data scientists</span><span>ICU nurses</span><span>cloud specialists</span><span>product designers</span></span><br>with ambitious companies.</p>
+        <div class="paths">
+          <a class="btn primary" href="#vacancies">Find your next opportunity <svg class="arrow" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M1 8h13M9 3l5 5-5 5"/></svg></a>
+          <a class="btn" href="#hiring-solutions">Find your next great hire <svg class="arrow" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M1 8h13M9 3l5 5-5 5"/></svg></a>
+        </div>
+      </div>
+      <nav class="hero-foot" aria-label="Areas of expertise">
+        <a href="#areas-of-expertise"><span><b>Technology</b>Software · Cloud · Product</span></a>
+        <a href="#areas-of-expertise"><span><b>Data</b>Science · Analytics · BI</span></a>
+        <a href="#areas-of-expertise"><span><b>Healthcare</b>ICU · ER · Theatres</span></a>
+        <span class="scroll" aria-hidden="true"><i></i>Scroll</span>
+      </nav>
+    </div></div>
+  </section>
+
+  <section class="pad" data-band="light">
+    <div class="wrap">
+      <div class="split">
+        <div class="rv"><p class="eyebrow" style="margin-bottom:26px">Empowering diversity · Unleashing innovation</p><p class="statement">We believe diversity fuels groundbreaking ideas and drives innovative solutions.</p></div>
+        <div class="rv" style="align-self:end">
+          <p class="lede muted">By bringing together different lived experiences, ways of thinking and approaches to challenges, we build teams that reshape industries. Our passion lies in connecting trailblazing individuals who can elevate companies to new heights.</p>
+          <div class="creds">
+            <span class="cred"><svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M2 7.5l3 3 7-7"/></svg>Certified women-owned</span>
+            <span class="cred"><svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M2 7.5l3 3 7-7"/></svg>Certified black-owned</span>
+          </div>
+        </div>
+      </div>
+      <div class="figs rv">
+        <div class="fig"><b>3</b><span>Continents: Europe, North America and Africa</span></div>
+        <div class="fig"><b>8</b><span>Nationalities in our team</span></div>
+        <div class="fig"><b>12</b><span>Languages spoken</span></div>
+        <div class="fig"><b>50%+</b><span>Of our team are women</span></div>
+      </div>
+    </div>
+  </section>
+
+  <div class="ink" id="homePlates"></div>
+
+  <section class="pad-s" data-band="light"><div class="wrap"><div class="also rv"><span class="eyebrow">Also serving</span><strong>Finance · Automotive · Energy · Engineering · Logistics</strong><a class="link" href="#areas-of-expertise" style="margin-left:auto">All areas of expertise <svg class="arrow" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M1 8h13M9 3l5 5-5 5"/></svg></a></div></div></section>
+
+  <section class="pad surface" data-band="light" style="padding-top:clamp(56px,7vw,96px)">
+    <div class="wrap">
+      <div class="head rv"><div><p class="eyebrow">For employers</p><h2 class="h2">Three ways to work with us.</h2></div><a class="link" href="#hiring-solutions">Compare hiring solutions <svg class="arrow" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M1 8h13M9 3l5 5-5 5"/></svg></a></div>
+      <div class="models" data-models="teaser"></div>
+    </div>
+  </section>
+
+  <section class="pad" data-band="light">
+    <div class="wrap">
+      <div class="head rv"><div><p class="eyebrow">Our values</p><h2 class="h2">Empowering the way we think.</h2></div></div>
+      <div class="values rv" data-values></div>
+    </div>
+  </section>
+
+  <section class="pad ink" data-band="dark" aria-labelledby="qTitle">
+    <div class="grain"></div>
+    <div class="wrap"><p class="eyebrow" id="qTitle" style="margin-bottom:40px">What people say</p><div data-quotes></div></div>
+  </section>
+
+  <section class="pad" data-band="light">
+    <div class="wrap">
+      <div class="head rv"><div><p class="eyebrow">Leadership</p><h2 class="h2">The people behind Alium.</h2></div><a class="link" href="#about-us">About us <svg class="arrow" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M1 8h13M9 3l5 5-5 5"/></svg></a></div>
+      <div class="people" data-people></div>
+    </div>
+  </section>
+
+  <section class="pad-s surface" data-band="light">
+    <div class="wrap">
+      <div class="head rv"><div><p class="eyebrow">International presence</p><h2 class="h2">One team, four cities.</h2></div></div>
+      <div class="offices rv" data-offices></div>
+    </div>
+  </section>
+
+  <section class="pad" data-band="light">
+    <div class="wrap">
+      <div class="head rv"><div><p class="eyebrow">Insights</p><h2 class="h2">Perspectives on diverse hiring.</h2></div><a class="link" href="#insights">All insights <svg class="arrow" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M1 8h13M9 3l5 5-5 5"/></svg></a></div>
+      <div class="cards" data-cards="3"></div>
+    </div>
+  </section>
+
+  <section class="ink" data-band="dark" aria-label="Choose your path"><div class="fork" data-fork></div></section>
+</div>
+
+<!-- ================= ABOUT ================= -->
+<div class="view" data-view="about-us" hidden>
+  <section class="phead ink" data-band="dark"><div class="bg"></div><canvas class="mark" data-print="701" aria-hidden="true"></canvas><div class="grain"></div>
+    <div class="wrap"><nav class="crumb" aria-label="Breadcrumb"><a href="#home">Alium</a><span>/</span><span>About us</span></nav>
+      <h1 tabindex="-1">Diversity at the speed of thinking.</h1>
+      <p class="lede">Certified women-owned and black-owned, our team is a powerhouse of amazing individuals from all corners of the globe. We're not just another recruitment agency; we're on a mission to redefine the game.</p></div>
+  </section>
+  <section class="pad" data-band="light">
+    <div class="wrap split">
+      <div class="rv"><p class="statement">Say hello to game-changing talent that mirrors the world's rich diversity.</p></div>
+      <div class="prose rv muted"><p>Leading by example, we're breaking barriers and forging a new path. Our foundation is built on the values of modern companies, making diversity and representation our driving force.</p><p>We've got the talent, the passion, and the certification to prove it. When you partner with us, you're choosing a trailblazing team that embraces the future of inclusivity.</p></div>
+    </div>
+    <div class="wrap"><div class="figs rv">
+      <div class="fig"><b>4</b><span>Locations: UK, Netherlands, US and South Africa</span></div>
+      <div class="fig"><b>8</b><span>Nationalities across 3 continents</span></div>
+      <div class="fig"><b>12</b><span>Languages spoken</span></div>
+      <div class="fig"><b>50%+</b><span>Of our team are women</span></div>
+    </div></div>
+  </section>
+  <section class="pad surface" data-band="light">
+    <div class="wrap"><div class="head rv"><div><p class="eyebrow">Leadership team</p><h2 class="h2">Meet our leadership.</h2></div></div><div class="people" data-people data-detail></div></div>
+  </section>
+  <section class="pad" data-band="light">
+    <div class="wrap"><div class="head rv"><div><p class="eyebrow">Our values</p><h2 class="h2">Empowering the way we think.</h2></div></div><div class="values rv" data-values></div></div>
+  </section>
+  <section class="pad ink" data-band="dark"><div class="grain"></div>
+    <div class="wrap split">
+      <div class="rv"><p class="eyebrow" style="margin-bottom:22px">Empowering our actions</p><h2 class="h2">Meaningful action for lasting change.</h2></div>
+      <ul class="rv" style="border-top:1px solid var(--line)">
+        <li style="padding:20px 0;border-bottom:1px solid var(--line)">We are committed to inclusion. Our diverse team don't just talk the talk; meaningful action is encouraged for lasting change.</li>
+        <li style="padding:20px 0;border-bottom:1px solid var(--line)">Unlock true potential by harnessing the power of diverse perspectives, paving the way for innovative breakthroughs.</li>
+        <li style="padding:20px 0;border-bottom:1px solid var(--line)">Discover a world of untapped talent and unparalleled creativity.</li>
+      </ul>
+    </div>
+  </section>
+  <section class="ink" data-band="dark" aria-label="Choose your path" style="border-top:1px solid var(--ink-line)"><div class="fork" data-fork></div></section>
+</div>
+
+<!-- ================= EXPERTISE ================= -->
+<div class="view" data-view="areas-of-expertise" hidden>
+  <section class="phead ink" data-band="dark"><div class="bg"></div><canvas class="mark" data-print="314" aria-hidden="true"></canvas><div class="grain"></div>
+    <div class="wrap"><nav class="crumb" aria-label="Breadcrumb"><a href="#home">Alium</a><span>/</span><span>Areas of expertise</span></nav>
+      <h1 tabindex="-1">Market specialists, not generalists.</h1>
+      <p class="lede">We're a team of market specialists, experienced in sourcing and successfully placing top talent into ambitious companies. Because our consultants bring real expertise and insight to their industries, our partners trust us to help them reach their hiring goals.</p></div>
+  </section>
+  <div class="ink" id="expPlates" style="border-top:1px solid var(--ink-line)"></div>
+  <section class="pad" data-band="light">
+    <div class="wrap split">
+      <div class="rv"><p class="eyebrow" style="margin-bottom:22px">Industries we serve</p><h2 class="h2">A global overview, a specialist's depth.</h2></div>
+      <div class="rv"><p class="lede muted">In an ever-changing business landscape, we stay flexible in our approach to recruitment to meet the needs and expectations of the evolving workforce. We give our customers a global overview and have clients in many countries, supported by a network of experienced, committed consultants.</p>
+        <ul class="inds" style="margin-top:30px"><li>IT</li><li>Finance</li><li>Healthcare</li><li>Automotive</li><li>Energy</li><li>Engineering</li><li>Logistics</li></ul></div>
+    </div>
+  </section>
+  <section class="ink" data-band="dark" aria-label="Choose your path"><div class="fork" data-fork></div></section>
+</div>
+
+<!-- ================= HIRING ================= -->
+<div class="view" data-view="hiring-solutions" hidden>
+  <section class="phead ink" data-band="dark"><div class="bg"></div><canvas class="mark" data-print="88" aria-hidden="true"></canvas><div class="grain"></div>
+    <div class="wrap"><nav class="crumb" aria-label="Breadcrumb"><a href="#home">Alium</a><span>/</span><span>Hiring solutions</span></nav>
+      <h1 tabindex="-1">Source. Engage. Scale.</h1>
+      <p class="lede">An agile approach that gives you the flexibility you need around hiring. Every company we partner with has different needs and requires a different level of support, and hiring top talent shouldn't be compromised by cost.</p></div>
+  </section>
+  <section class="pad" data-band="light">
+    <div class="wrap"><div class="head rv"><div><p class="eyebrow">Browse our services</p><h2 class="h2">Choose the level of support you need.</h2></div></div><div class="models" data-models="full"></div></div>
+  </section>
+  <section class="pad ink" data-band="dark"><div class="grain"></div>
+    <div class="wrap">
+      <div class="head rv"><div><p class="eyebrow">Diversity hiring</p><h2 class="h2">Proactive about diversity, equity and inclusion.</h2></div></div>
+      <div class="split rv" style="margin-bottom:clamp(40px,6vw,80px)"><p class="lede">As specialists in diversity talent research and intelligence, we partner with global brands to help them meet their diversity hiring goals and targets.</p><p class="muted">We do this by mapping the market for you and delivering pipelines of diverse talent exclusively for you.</p></div>
+      <ol class="steps rv">
+        <li><b>Market research</b><span>Detailed reports on diversity in your industry and location.</span></li>
+        <li><b>Talent mapping</b><span>We identify top diverse talent and build pipelines for your internal talent team.</span></li>
+        <li><b>Talent screening</b><span>If your team is stretched, we screen candidates and deliver a shortlist of interested, relevant diverse talent.</span></li>
+        <li><b>Candidate experience</b><span>We act as the link with your internal talent team so candidates stay engaged with your company.</span></li>
+        <li><b>Embedded talent partner</b><span>One of our experts sits alongside your internal team to make sure you hit your goals.</span></li>
+        <li><b>Inclusive process review</b><span>A deep dive into your recruitment process, including adverts and interview questions.</span></li>
+      </ol>
+    </div>
+  </section>
+  <section class="pad" data-band="light"><div class="wrap"><div data-quotes data-light></div></div></section>
+  <section class="pad-s surface" data-band="light"><div class="wrap split" style="align-items:end"><h2 class="h2 rv">Tell us who you're looking for.</h2><div class="rv" style="display:grid;gap:20px;justify-items:start"><p class="muted">A market specialist will come back to you to talk through the role, the market and the right model.</p><a class="btn primary" href="#contact-us" data-intent="hiring">Start a hiring conversation <svg class="arrow" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M1 8h13M9 3l5 5-5 5"/></svg></a></div></div></section>
+</div>
+
+<!-- ================= VACANCIES ================= -->
+<div class="view" data-view="vacancies" hidden>
+  <section class="phead ink" data-band="dark"><div class="bg"></div><canvas class="mark" data-print="512" aria-hidden="true"></canvas><div class="grain"></div>
+    <div class="wrap"><nav class="crumb" aria-label="Breadcrumb"><a href="#home">Alium</a><span>/</span><span>Vacancies</span></nav>
+      <h1 tabindex="-1">Your next move starts here.</h1>
+      <p class="lede">Search our live roles in Technology, Data and Healthcare. You're more than a CV, so if nothing fits today, tell us what you're looking for and a specialist will keep you in mind.</p></div>
+  </section>
+  <section class="pad-s" data-band="light">
+    <div class="wrap">
+      <!-- INTEGRATION POINT: live job board at aliumc.com/vacancies (canonical /jobs).
+           Verified param: sector (1 = Technology, 2 = Data, 14 = Health).
+           keyword / location / distance param names must be confirmed with the platform (Bold Identities build). -->
+      <form class="search rv" id="jobSearch" role="search" aria-label="Search vacancies">
+        <div class="fld"><label for="jq">Job title or keyword</label><input id="jq" name="keyword" type="search" placeholder="e.g. Data engineer, ICU nurse" autocomplete="off"></div>
+        <div class="fld"><label for="jl">Location</label><input id="jl" name="location" type="text" placeholder="City or postcode"></div>
+        <div class="fld"><label for="jd">Distance</label><select id="jd" name="distance"><option>20km</option><option>30km</option><option selected>50km</option><option>70km</option><option>90km</option><option>110km</option><option>130km</option></select></div>
+        <button class="btn primary" type="submit">Search roles <svg class="arrow" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M1 8h13M9 3l5 5-5 5"/></svg></button>
+      </form>
+      <div class="filters" role="group" aria-label="Sector">
+        <button type="button" data-sector="" aria-pressed="true">All sectors</button>
+        <button type="button" data-sector="1" aria-pressed="false">Technology</button>
+        <button type="button" data-sector="2" aria-pressed="false">Data</button>
+        <button type="button" data-sector="14" aria-pressed="false">Healthcare</button>
+      </div>
+      <div class="result" aria-live="polite">
+        <div><h3 id="jobMsg">Search our live job board.</h3><p id="jobSub">Results, full job descriptions and applications open on our job board in a new tab, so you always see the latest roles.</p></div>
+        <a class="btn" id="jobOpen" href="https://www.aliumc.com/vacancies" target="_blank" rel="noopener">Open job board <svg class="arrow" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M1 8h13M9 3l5 5-5 5"/></svg></a>
+      </div>
+    </div>
+  </section>
+  <section class="pad-s surface" data-band="light">
+    <div class="wrap"><div class="head rv"><div><p class="eyebrow">Browse by specialism</p><h2 class="h2">Where we place people.</h2></div></div><div data-browse></div></div>
+  </section>
+  <section class="pad ink" data-band="dark"><div class="grain"></div>
+    <div class="wrap split" style="align-items:end">
+      <div class="rv"><p class="eyebrow" style="margin-bottom:22px">Nothing quite right yet?</p><h2 class="h2">Tell us what you want next.</h2></div>
+      <div class="rv" style="display:grid;gap:20px;justify-items:start"><p class="muted">Share what you're looking for and the best way to reach you. Many of the roles we work on are filled through our network before they're advertised.</p><a class="btn primary" href="#contact-us" data-intent="work">Register your interest <svg class="arrow" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M1 8h13M9 3l5 5-5 5"/></svg></a></div>
+    </div>
+  </section>
+</div>
+
+<!-- ================= JOIN ================= -->
+<div class="view" data-view="join-us" hidden>
+  <section class="phead ink" data-band="dark"><div class="bg"></div><canvas class="mark" data-print="1203" aria-hidden="true"></canvas><div class="grain"></div>
+    <div class="wrap"><nav class="crumb" aria-label="Breadcrumb"><a href="#home">Alium</a><span>/</span><span>Join the team</span></nav>
+      <h1 tabindex="-1">Welcome home.</h1>
+      <p class="lede">We're not just a team; we're a close-knit family. When you join us, you're not just signing up for a job. You're stepping into an environment where every member's contribution matters.</p></div>
+  </section>
+  <section class="pad" data-band="light">
+    <div class="wrap split">
+      <div class="rv"><p class="eyebrow" style="margin-bottom:22px">Diversity &amp; inclusion</p><p class="lede">Alium is a people-first business, passionate about the unique understanding and perspective that only comes with a diverse team of individuals and personalities. We lead by example and practise what we preach, embracing the empathy and humanity that make a positive impact in an often too-corporate world.</p></div>
+      <div class="rv"><p class="eyebrow" style="margin-bottom:22px">Equal opportunities</p><p class="prose muted">Alium is an equal opportunities employer and positively encourages applications from suitably qualified and eligible candidates regardless of gender, race, disability, age, sexual orientation, gender reassignment, religion or belief, marital status, or pregnancy and maternity. We actively champion more women in technology, a challenge being recognised by organisations around the world.</p></div>
+    </div>
+  </section>
+  <section class="pad ink" data-band="dark"><div class="grain"></div>
+    <div class="wrap"><div class="head rv"><div><p class="eyebrow">Why join us?</p><h2 class="h2">Together, we achieve greatness.</h2></div></div>
+      <ul class="benefits rv">
+        <li>Holiday incentives<span>Ibiza · Miami · Skiing</span></li><li>Up to 35% commission<span>Earnings</span></li>
+        <li>Lunch club<span>Team</span></li><li>Quarterly team outing<span>Team</span></li>
+        <li>Monthly team incentives<span>Rewards</span></li><li>Weekly and monthly individual prizes<span>Rewards</span></li>
+        <li>Transparent progression route<span>Growth</span></li><li>Investment in your personal development<span>Growth</span></li>
+        <li>Best tooling to help you succeed<span>Tools</span></li><li>Hybrid working<span>Flexibility</span></li>
+      </ul></div>
+  </section>
+  <section class="pad-s surface" data-band="light"><div class="wrap split" style="align-items:end"><h2 class="h2 rv">Ready to be part of something extraordinary?</h2><div class="rv" style="display:grid;gap:20px;justify-items:start"><p class="muted">Send us a note about you and the role you'd love at Alium, and attach your CV when we reply.</p><a class="btn primary" href="#contact-us" data-intent="join">Send us your CV <svg class="arrow" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M1 8h13M9 3l5 5-5 5"/></svg></a></div></div></section>
+</div>
+
+<!-- ================= INSIGHTS ================= -->
+<div class="view" data-view="insights" hidden>
+  <section class="phead ink" data-band="dark"><div class="bg"></div><div class="grain"></div>
+    <div class="wrap"><nav class="crumb" aria-label="Breadcrumb"><a href="#home">Alium</a><span>/</span><span>Insights</span></nav>
+      <h1 tabindex="-1">Insights.</h1>
+      <p class="lede">Practical thinking on diversity, equity and inclusion in tech, data and the wider world of work.</p></div>
+  </section>
+  <section class="pad-s" data-band="light">
+    <div class="wrap">
+      <a class="card rv" id="featured" style="grid-template-columns:minmax(0,1.3fr) minmax(0,1fr);gap:clamp(20px,4vw,64px);align-items:end;margin-bottom:clamp(56px,8vw,104px)"></a>
+      <div class="filters" role="group" aria-label="Filter by topic" id="topicFilters" style="margin:0 0 36px"></div>
+      <div class="cards" data-cards="all"></div>
+    </div>
+  </section>
+</div>
+
+<!-- ================= ARTICLE ================= -->
+<div class="view" data-view="article" hidden>
+  <article>
+    <section class="phead ink" data-band="dark"><div class="bg"></div><canvas class="mark" id="artMark" aria-hidden="true"></canvas><div class="grain"></div>
+      <div class="wrap"><nav class="crumb" aria-label="Breadcrumb"><a href="#insights">Insights</a><span>/</span><span id="artTag"></span></nav>
+        <h1 id="artTitle" tabindex="-1" style="font-size:clamp(2.2rem,5vw,4.6rem);max-width:20ch"></h1>
+        <p class="lede" id="artDate"></p></div>
+    </section>
+    <div class="wrap article-body">
+      <aside><span>Alium Insights</span><a class="link" href="#insights">All insights</a></aside>
+      <div class="prose" id="artBody"></div>
+    </div>
+  </article>
+  <section class="pad-s surface" data-band="light"><div class="wrap"><div class="head"><div><p class="eyebrow">More insights</p><h2 class="h2">Keep reading.</h2></div></div><div class="cards" id="related"></div></div></section>
+</div>
+
+<!-- ================= CONTACT ================= -->
+<div class="view" data-view="contact-us" hidden>
+  <section class="phead ink" data-band="dark"><div class="bg"></div><div class="grain"></div>
+    <div class="wrap"><nav class="crumb" aria-label="Breadcrumb"><a href="#home">Alium</a><span>/</span><span>Contact us</span></nav>
+      <h1 tabindex="-1">We'd love to hear from you.</h1>
+      <p class="lede">Looking for work, hiring talent or simply curious, tell us a little about yourself and the right specialist will get back to you.</p></div>
+  </section>
+  <section class="pad-s" data-band="light">
+    <div class="wrap contact-grid">
+      <!-- INTEGRATION POINT: set ALIUM_FORM_ENDPOINT in the script to the live form handler.
+           Until then the form validates and prepares the message for the visitor to email; it never claims to have sent it. -->
+      <form class="cform rv" id="cform" novalidate>
+        <fieldset class="intent">
+          <legend>I'd like to discuss</legend>
+          <label><input type="radio" name="intent" value="work" checked><span>Looking for work</span></label>
+          <label><input type="radio" name="intent" value="hiring"><span>Hiring talent</span></label>
+          <label><input type="radio" name="intent" value="join"><span>Joining the Alium team</span></label>
+          <label><input type="radio" name="intent" value="general"><span>General enquiry</span></label>
+        </fieldset>
+        <div class="grid2">
+          <div class="field"><label for="cName">Your name</label><input id="cName" name="name" autocomplete="name" required></div>
+          <div class="field"><label for="cCo">Company (optional)</label><input id="cCo" name="company" autocomplete="organization"></div>
+          <div class="field"><label for="cMail">Email</label><input id="cMail" name="email" type="email" autocomplete="email" required></div>
+          <div class="field"><label for="cTel">Phone (optional)</label><input id="cTel" name="phone" type="tel" autocomplete="tel"></div>
+        </div>
+        <div class="field"><label for="cMsg">Message (optional)</label><textarea id="cMsg" name="message" placeholder="The role, the team, the timing…"></textarea></div>
+        <div class="hp" aria-hidden="true"><label for="cWeb">Leave this empty</label><input id="cWeb" name="website" tabindex="-1" autocomplete="off"></div>
+        <p class="errs" id="cErr" role="alert"></p>
+        <div><button class="btn primary" type="submit" id="cSubmit">Continue <svg class="arrow" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M1 8h13M9 3l5 5-5 5"/></svg></button></div>
+        <div class="handoff" id="handoff" hidden>
+          <b style="font:600 1.3rem var(--f-display)">Your message is ready to send.</b>
+          <p class="muted">Online sending isn't switched on yet. Copy the message below and email it to <span style="user-select:all;font-weight:600;color:var(--fg)">info@aliumc.com</span>, or call the office nearest to you.</p>
+          <pre id="hoText"></pre>
+          <div class="row2"><button class="btn" type="button" id="hoCopy" style="min-height:44px">Copy message</button><a class="link" id="hoMail" href="mailto:info@aliumc.com">Open in your email app</a><span class="muted" id="hoState" aria-live="polite"></span></div>
+        </div>
+      </form>
+      <div class="rv">
+        <p class="eyebrow">Email</p>
+        <p style="font:600 clamp(1.3rem,2.2vw,1.8rem) var(--f-display);margin:10px 0 28px;user-select:all">info@aliumc.com</p>
+        <div data-locs></div>
+        <div class="socials" data-socials></div>
+      </div>
+    </div>
+  </section>
+  <section class="pad-s surface" data-band="light"><div class="wrap"><div class="offices" data-offices data-clock-only></div></div></section>
+</div>
+
+</main>
+
+<footer class="ftr cocoa" data-band="deep">
+  <div class="wrap">
+    <div class="fcols">
+      <div><p class="fstate">Say hello to game-changing talent that mirrors the world's rich diversity.</p><a class="btn primary" href="#contact-us" style="margin-top:28px">Get in touch <svg class="arrow" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M1 8h13M9 3l5 5-5 5"/></svg></a></div>
+      <div><h4>For candidates</h4><ul><li><a href="#vacancies">Find a job</a></li><li><a href="#areas-of-expertise">Areas of expertise</a></li><li><a href="#contact-us" data-intent="work">Register your interest</a></li><li><a href="#join-us">Join the Alium team</a></li></ul></div>
+      <div><h4>For employers</h4><ul><li><a href="#hiring-solutions">Hiring solutions</a></li><li><a href="#hiring-solutions">Diversity hiring</a></li><li><a href="#contact-us" data-intent="hiring">Hire talent</a></li><li><a href="#insights">Insights</a></li></ul></div>
+      <div><h4>Contact</h4><ul><li style="user-select:all">info@aliumc.com</li><li>UK <span style="user-select:all">+44 2038 548 360</span></li><li>US <span style="user-select:all">+1 3476 144 575</span></li><li>NL <span style="user-select:all">+31 154 550 028</span></li></ul><ul data-socials-list style="margin-top:18px"></ul></div>
+    </div>
+    <span class="wordmark" aria-hidden="true">alium</span>
+    <div class="legal">
+      <span>© <span id="yr">2026</span> Alium Consultancy. All rights reserved.</span>
+      <nav aria-label="Legal">
+        <a class="ext" href="https://www.aliumc.com/uploads/privacy-policy" target="_blank" rel="noopener">Privacy policy</a>
+        <a class="ext" href="https://www.aliumc.com/uploads/cookies" target="_blank" rel="noopener">Cookies</a>
+        <a class="ext" href="https://www.aliumc.com/uploads/terms-and-conditions" target="_blank" rel="noopener">Terms and conditions</a>
+        <a class="ext" href="https://www.aliumc.com/uploads/slavery" target="_blank" rel="noopener">Modern slavery statement</a>
+        <a class="ext" href="https://www.aliumc.com/uploads/evironmental" target="_blank" rel="noopener">Environmental policy</a>
+      </nav>
+    </div>
+  </div>
+</footer>
+
+<script>
+(() => {
+"use strict";
+const ALIUM_FORM_ENDPOINT = ""; // INTEGRATION POINT, e.g. "/api/contact". Empty = no live submission.
+const BOARD = "https://www.aliumc.com/vacancies";
+const SECTORS = [
+  {key:"tech", id:1, name:"Technology", style:"tech", seed:21, cls:"sec-tech band-teal", band:"dark",
+   intro:"The engineers, architects and product people building what comes next. We place specialists across the full software lifecycle.",
+   specs:["Software Engineering","Data Engineering","Cloud and Infrastructure","Testing and Support","Product and Design"]},
+  {key:"data", id:2, name:"Data", style:"dots", seed:57, cls:"sec-data band-navy", band:"dark", flip:true,
+   intro:"People who turn information into decisions. From governance to the models and dashboards a business runs on.",
+   specs:["Data Science","Data Governance","Data Analytics","Business Intelligence"]},
+  {key:"health", id:14, name:"Healthcare", style:"soft", seed:93, cls:"sec-health band-warm", band:"light",
+   intro:"Clinical professionals who hold lives in their hands. We support nurses and specialists into assignments, at home and abroad, every step of the way.",
+   specs:["Intensive Care","Emergency Room","Medical Surgical","Operating Room","Neonatal Intensive Care","Mother & Baby"]}
+];
+const LEADERS = [
+  {name:"Ana Vilhete", role:"Founder", email:"ana@aliumc.com", seed:1101, ini:"AV"},
+  {name:"Lily Anh Au-yeung", role:"Operations Manager", email:"lily@aliumc.com", seed:2202, ini:"LA"},
+  {name:"Monica Ivan", role:"Finance Manager", email:"accounts@aliumc.com", seed:3303, ini:"MI"},
+  {name:"Myran Perry", role:"Director", email:"myran@aliumc.com", tel:"+44 2038 548 386", li:"https://www.linkedin.com/in/myranperry/", seed:4404, ini:"MP"}
+];
+const VALUES = [
+  {k:"Courage", d:"We are driven by diversity in thinking. We're not afraid to step out of the norm."},
+  {k:"Excellence", d:"Committed to improving, developing and making a difference."},
+  {k:"Kindness", d:"Teamwork is at the core of our mission. We would be nothing without the brilliant support of our people."}
+];
+const QUOTES = [
+  {text:"This is a good company to work for. They gave me my first assignment to the Caribbean as an RN and made sure my experience went very smoothly. Ana was there every step of the way and answered my questions promptly and in a very professional manner. Very understanding and flexible to work with. I will definitely recommend this company to family and friends!", who:"Elon Wameyo Jr.", what:"Registered Nurse · Caribbean assignment", seed:777},
+  {text:"Alium went to great lengths to make sure I was the right candidate for a sought after position, as well as making sure that the company was right for me. The recruitment turned out to be a very good fit both for me and for the recruiting company. I was also impressed by how Alium and its employees showed great dedication and professionalism during but also after my successful placement.", who:"Consultant", what:"Deloitte", seed:888},
+  {text:null, tags:["Professionalism","Quality","Responsiveness","Value"], who:"Ressa Wilson", what:"E-works", seed:999}
+];
+const OFFICES = [
+  {city:"London", cc:"UK", tz:"Europe/London", tel:"+44 2038 548 360", addr:"1 Canada Square, Canary Wharf, London, E14 5AA"},
+  {city:"Amsterdam", cc:"NL", tz:"Europe/Amsterdam", tel:"+31 154 550 028", addr:"Poortland 66, 1046 BD, Amsterdam"},
+  {city:"Wilmington", cc:"US", tz:"America/New_York", tel:"+1 3476 144 575", addr:"221 W 9th St, PMB 288, Wilmington DE, 19801"},
+  {city:"Cape Town", cc:"SA", tz:"Africa/Johannesburg", tel:null, addr:"80 Strand St, Cape Town City Centre, Cape Town, 8001, South Africa"}
+];
+const SOCIALS = [
+  ["LinkedIn","https://www.linkedin.com/company/aliumconsultancy"],
+  ["Instagram","https://instagram.com/alium_consultancy"],
+  ["Facebook","https://www.facebook.com/aliumconsultancy"],
+  ["Freelance.nl","https://www.freelance.nl/profiel/379373-alium-consultancy"]
+];
+const ARTICLES = [
+  {slug:"dei-october-reflections", old:"/insight/driving-diversity-equity-and-inclusion-in-tech-october-reflections", date:"2023-10-02", tag:"DEI", seed:4401,
+   title:"Driving Diversity, Equity, and Inclusion in Tech: October Reflections",
+   excerpt:"The transition from summer to autumn is a unique opportunity for tech companies to re-evaluate their commitment to diversity, equity, and inclusion.",
+   body:`<p>September marks not only the transition from summer to fall but also presents a unique opportunity for tech companies to reevaluate their commitment to diversity, equity, and inclusion.</p>
+<p>As the tech, cloud, and data industry continues to evolve, fostering a diverse and inclusive workforce remains a top priority. As we know, the more diverse the way of thinking, the better the work! October is the perfect time to reflect on our DEI efforts and provide actionable strategies to drive meaningful change.</p>
+<h2>3 things to focus on in Q4</h2>
+<ol><li><strong>Planning for the future.</strong> Many businesses use the end of summer to plan for the upcoming year. Integrating DEI into these plans ensures it receives the attention and resources it deserves.</li>
+<li><strong>National Diversity Month.</strong> October is Black History Month in the UK, and we will continue shining a spotlight on the importance of diversity and inclusion.</li>
+<li><strong>Reflect and reset.</strong> The last quarter is a chance to reflect on your organisation's DEI progress, celebrate successes, and address any areas that need improvement.</li></ol>
+<h2>Strategies for DEI success</h2>
+<p><strong>Assess your current state.</strong> Start by evaluating your current DEI efforts. Identify strengths and areas that need improvement to create a roadmap for progress.</p>
+<ul class="b"><li><strong>Engage leadership:</strong> ensure senior leadership is actively engaged and committed to DEI initiatives. Their buy-in is crucial to driving meaningful change.</li>
+<li><strong>Set clear goals:</strong> establish specific, measurable, and time-bound DEI goals. Share them with your workforce, fostering a sense of collective responsibility.</li>
+<li><strong>Invest in education:</strong> provide DEI training and resources for employees at all levels. Promote awareness and understanding of DEI issues and best practices.</li>
+<li><strong>Diverse hiring:</strong> review your recruitment strategies to attract a more diverse pool of candidates. Implement blind recruitment practices and consider diverse interview panels.</li>
+<li><strong>Employee Resource Groups (ERGs):</strong> encourage ERGs to provide a safe space for employees to share experiences, offer support, and drive change.</li>
+<li><strong>Transparency and accountability:</strong> share DEI progress and setbacks openly with your workforce, and establish accountability mechanisms to ensure ongoing improvement.</li>
+<li><strong>Community engagement:</strong> partner with local organisations and initiatives that align with your DEI goals.</li></ul>
+<p>Remember that DEI is an ongoing journey, not a one-time project. By taking action now, even if it's grassroots planning, you can create a more inclusive and equitable workplace that benefits both your employees and your organisation as a whole.</p>`},
+  {slug:"tackle-gender-diversity", old:"/insight/are-you-doing-enough-to-tackle-gender-diversity-", date:"2023-07-17", tag:"Gender diversity", seed:5502,
+   title:"Are you doing enough to tackle Gender Diversity?",
+   excerpt:"Only 16% of Germany's tech workforce are women, and even fewer work in software roles. What more can be done?",
+   body:`<p>Having a robust diversity and inclusion strategy is vital for any progressive company. However, the tech sector in Germany still faces significant challenges when it comes to gender diversity, especially in software roles. Despite acknowledging the benefits of diversity, the numbers remain discouraging, with only 16% of the tech workforce being women, and even fewer in software roles. This raises the crucial question: "What more can be done?"</p>
+<p>Gender diversity matters greatly in the tech sector, which plays a pivotal role in shaping our future. To create culturally sensitive and equitable technologies, the industry needs to reflect the wider population. Studies have demonstrated that diverse teams lead to increased productivity, better decision-making, and improved financial performance, making it clear that hiring a diverse workforce is key to fostering creativity, innovation, and driving economic success.</p>
+<h2>Essential steps to consider</h2>
+<ol><li>Evaluate your hiring and sourcing strategy to align it with your DEI (Diversity, Equity, and Inclusion) strategy.</li>
+<li>Provide training to your leaders on topics like unconscious bias.</li>
+<li>Review your flexible working policies and explore how they can aid in diversifying your workforce.</li>
+<li>Analyse and address your gender pay gap.</li>
+<li>Implement strategies to ensure better gender representation across all levels of your organisation.</li></ol>
+<p>By taking these measures, we can pave the way for a more inclusive and diverse tech sector that benefits everyone involved. Let's work together to make a positive change for a brighter future.</p>`},
+  {slug:"neurodiversity-in-software-engineering", old:"/insight/k-test-blog-with-a-long-title-for-testing", date:"2023-07-11", tag:"Neurodiversity", seed:6603,
+   title:"Neurodiversity in Software Engineering: Embracing Unique Talent",
+   excerpt:"The tech industry is acknowledging the advantages of accommodating and nurturing a neurodiverse workforce.",
+   body:`<p>Software engineering is renowned for its fast-paced nature, attention to detail, and focus on growth. What sets apart exceptional software developers is a distinct skill set that demands a special approach to coding. While the call for diversity is no longer just a buzzword, the tech industry is now acknowledging the advantages of accommodating and nurturing a neurodiverse workforce.</p>
+<h2>What is neurodiversity?</h2>
+<p>It's the recognition that people experience and interact with the world in various ways. There's no one "right" way of thinking, learning, or behaving, and these differences are celebrated and accepted. The term neurodiversity primarily includes conditions such as Autism Spectrum Disorder (ASD), Attention Deficit Hyperactivity Disorder (ADHD), dyslexia, and Tourette's Syndrome.</p>
+<h2>The benefits</h2>
+<p>The benefits of neurodiversity in software engineering are substantial. A homogenous workplace limits innovative problem-solving and overlooks a valuable pool of creative talent. Embracing neurodiversity brings enhanced abilities in processing complex data, exceptional attention to detail, increased efficiency, and unique problem-solving approaches.</p>
+<p>Thankfully, there are initiatives and organisations like Neurodiversity in Tech (NIT) and Auticon, dedicated to supporting neurodiverse individuals in software engineering. They collaborate with companies to provide recruitment assistance, training, mentorship, and professional development. Additionally, a growing community of neurodiverse individuals offers support groups and resources that foster social connections and help people navigate opportunities within the tech industry.</p>
+<p>Neurodiversity has long been neglected in software engineering, failing to recognise the full scope of human abilities. However, a newfound drive is emerging to embrace neurodiversity as a crucial aspect of diversity and unlock the potential of the neurodiverse community in technology. As a community of software engineers, it's up to us to cultivate an inclusive culture that acknowledges neurodivergent needs and proactively offers fair opportunities for those who need a chance to demonstrate their potential.</p>
+<p>By harnessing the richness of neurodiversity, we open up incredible possibilities not only for companies but for society as a whole. Let's work together to embrace unique talents and create a more diverse and innovative future in software engineering.</p>`},
+  {slug:"overcoming-unconscious-bias", old:"/insight/lorem-ipsum-dolor-sit-amet-7", date:"2023-07-07", tag:"Hiring", seed:7704,
+   title:"Overcoming Unconscious Bias in Software Engineering Hiring",
+   excerpt:"Unconscious biases can lead to discrimination in hiring and limit the applicant pool. Here's how to understand and overcome them.",
+   body:`<p>Unconscious biases are social stereotypes and prejudices that individuals hold, shaped by societal norms and personal experiences. In software engineering, where diversity fuels innovation and success, these biases can lead to discrimination in hiring and limit the applicant pool. To create a conscious and inclusive workplace environment, it's crucial to understand and overcome these biases.</p>
+<p>Unconscious bias can significantly impact hiring decisions, especially in fields like software engineering with low representation of minority individuals and women. It manifests in various forms, based on race, gender, disability, age, and social class, affecting interview choices, questions asked, and candidate evaluations. To promote diversity, we must focus on hiring based on skills, talent, potential, and culture fit.</p>
+<h2>Steps to overcome unconscious bias</h2>
+<ol><li><strong>Evaluate and recognise biases.</strong> Be aware of your implicit biases and their underlying reasons. Be mindful during candidate interviews and regularly reassess your biases.</li>
+<li><strong>Standardise the interview process.</strong> Establish consistent, standardised interview procedures, including specific questions for each candidate, while ensuring a diverse panel of interviewers.</li>
+<li><strong>Implement blind résumé reviews.</strong> Conceal names and non-essential personal details from résumés, focusing solely on qualifications to level the playing field for all applicants.</li>
+<li><strong>Strengthen diversity recruitment.</strong> Actively seek candidates from diverse sources and networks, including groups underrepresented in technology. Engage in events, job fairs, and professional networks.</li>
+<li><strong>Use inclusive language in job descriptions.</strong> Craft job postings and descriptions with language that promotes inclusivity and avoids unnecessary exclusivity.</li></ol>
+<p>The impact of overcoming unconscious bias is a more diverse, empowering, and inclusive workforce. Such diversity drives innovation, productivity, and creativity within the tech industry. Inclusive companies benefit from a broader range of ideas and perspectives, enabling comprehensive problem-solving and leading to overall success.</p>
+<p>Successfully overcoming unconscious biases in hiring requires ongoing effort and integration into the company's culture and values. Regularly re-evaluate hiring processes and make a concerted, conscious effort to reduce barriers for prospective employees, finding the most exemplary and diverse candidates to drive success in the company and the tech industry as a whole.</p>`}
+];
+
+
+/* Photography: set a URL per sector to replace the lit plate with real imagery (Ken Burns applied automatically). */
+const LOOK = {tech:{tone:"steel", photo:""}, data:{tone:"blue", photo:""}, health:{tone:"amber", photo:""}};
+const TONES = ["steel","blue","amber"];
+const ARROW = '<svg class="arrow" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M1 8h13M9 3l5 5-5 5"/></svg>';
+const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+const $ = (s, r=document) => r.querySelector(s), $$ = (s, r=document) => [...r.querySelectorAll(s)];
+const esc = s => String(s).replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const fmtDate = d => new Date(d+"T12:00:00Z").toLocaleDateString("en-GB",{day:"numeric",month:"long",year:"numeric"});
+const sectorUrl = id => BOARD + "?sector=" + id;
+const easeIO = t => t<.5 ? 4*t*t*t : 1-Math.pow(-2*t+2,3)/2;
+
+/* ---------- Fingerprint watermark (quiet, monochrome) ---------- */
+function rng(a){return function(){a|=0;a=a+0x6D2B79F5|0;let t=Math.imul(a^a>>>15,1|a);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296}}
+const printCache = new Map();
+function genPrint(seed){
+  if (printCache.has(seed)) return printCache.get(seed);
+  const R = rng(seed), lines = [];
+  const p1=R()*6.283, p2=R()*6.283, a1=.045+R()*.05, tilt=(R()-.5)*.3, cy=-.1+R()*.08, sx=.7+R()*.08;
+  const inOval = (x,y) => (x/.86)**2 + (y/1)**2 < 1;
+  const rot = (x,y) => [x*Math.cos(tilt)-y*Math.sin(tilt), x*Math.sin(tilt)+y*Math.cos(tilt)];
+  const N = 25;
+  let ridge = 0;
+  const push = (cur) => { if (cur.length > 3) lines.push({pts:cur, r:ridge}); };
+  for (let i=1;i<=N;i++){
+    ridge = i;
+    const b = i/N + (R()-.5)*.008;
+    const gap = Math.min(1.25, b < .32 ? .12 : .12 + (b-.32)*1.5);
+    const t0 = Math.PI/2 + gap, t1 = Math.PI/2 + Math.PI*2 - gap;
+    const steps = 36 + i*9;
+    let cur = [], skip = 0;
+    for (let k=0;k<=steps;k++){
+      const t = t0 + (t1-t0)*k/steps;
+      const r = b*(1 + a1*Math.sin(2*t+p1) + .03*Math.sin(3*t+p2) + .018*Math.sin(5*t+i*.7));
+      let x = r*Math.cos(t)*sx, y = cy + r*Math.sin(t)*.92;
+      if (Math.sin(t) > 0) y += Math.sin(t)**2 * b * .14;
+      [x,y] = rot(x,y);
+      if (skip > 0){ skip--; continue; }
+      if (!inOval(x,y)){ push(cur); cur=[]; continue; }
+      if (R() < .012 && cur.length > 6){ push(cur); cur=[]; skip = 1 + (R()*3|0); continue; }
+      cur.push([x,y]);
+    }
+    push(cur);
+  }
+  for (let j=0;j<11;j++){
+    ridge = N+1+j;
+    const y0 = cy + .5 + j*.052;
+    let cur = [];
+    for (let k=0;k<=70;k++){
+      const u = -1 + 2*k/70;
+      let x = u*.86, y = y0 - .2*(1-u*u)*(1-j/12) + .012*Math.sin(u*7+j+p1);
+      [x,y] = rot(x,y);
+      if (!inOval(x,y)){ push(cur); cur=[]; continue; }
+      if (R() < .01 && cur.length > 6){ push(cur); cur=[]; continue; }
+      cur.push([x,y]);
+    }
+    push(cur);
+  }
+  printCache.set(seed, lines);
+  return lines;
+}
+
+function drawMark(cv){
+  const w = cv.clientWidth, h = cv.clientHeight; if (!w || !h) return;
+  const dpr = Math.min(devicePixelRatio||1, 2);
+  cv.width = Math.round(w*dpr); cv.height = Math.round(h*dpr);
+  const ctx = cv.getContext("2d"), W = cv.width, H = cv.height, S = Math.min(W/.95, H/1.05)*.5;
+  ctx.clearRect(0,0,W,H);
+  ctx.strokeStyle = getComputedStyle(cv).color; ctx.lineWidth = Math.max(1, S*.005); ctx.lineCap = "round";
+  genPrint(+cv.dataset.print || 7).forEach(l => { ctx.beginPath(); l.pts.forEach((p,k) => { const x = W/2 + p[0]*S, y = H/2 + p[1]*S; k ? ctx.lineTo(x,y) : ctx.moveTo(x,y); }); ctx.stroke(); });
+}
+const ro = new ResizeObserver(es => es.forEach(e => drawMark(e.target)));
+function watchMarks(root=document){ $$("canvas[data-print]", root).forEach(cv => { if (!cv._w){ cv._w = 1; ro.observe(cv); } }); }
+
+/* ---------- Components ---------- */
+function plateHTML(s){
+  const L = LOOK[s.key];
+  return `<section class="plate tone-${L.tone}" data-band="dark" aria-labelledby="pl-${s.key}">
+    <div class="plate-bg" data-parallax="0.12"><div class="tint">${L.photo ? `<img src="${L.photo}" alt="" loading="lazy">` : ""}</div><canvas data-print="${s.seed}" aria-hidden="true"></canvas><div class="vignette"></div></div>
+    <div class="grain"></div>
+    <div class="wrap plate-in">
+      <div class="rv"><p class="eyebrow">Area of expertise</p><h3 id="pl-${s.key}">${s.name}</h3></div>
+      <div class="rv">
+        <p class="lede">${s.intro}</p>
+        <ul class="specs">${s.specs.map(x => `<li>${x}</li>`).join("")}</ul>
+        <div class="acts"><a class="btn primary" href="${sectorUrl(s.id)}" target="_blank" rel="noopener">See ${s.name} roles ${ARROW}</a><a class="link" href="#contact-us" data-intent="hiring">Hire in ${s.name} ${ARROW}</a></div>
+      </div>
+    </div>
+  </section>`;
+}
+["#homePlates","#expPlates"].forEach(id => $(id).innerHTML = SECTORS.map(plateHTML).join(""));
+
+const MODELS = [
+  {k:"Source", tag:"Start without commitment", for:"A success-based model with no upfront costs.", d:"A brilliant way to partner with us without any long-term commitment. One of our market specialists partners with you for your hiring campaign, and you get access to our talented network of local candidates.",
+   t:["Dedicated market specialist","Access to our candidate network","Complimentary review of your current hiring process","No upfront costs","Flat introduction fee","Free replacement if the candidate leaves within 30 days"]},
+  {k:"Engage", tag:"For key hires", for:"A premium solution for ambitious companies making key hires.", d:"Our extended resourcing model fully maps the market for passive candidates as well as giving you access to our own network. Every candidate presented is exclusive to you, improving your chances of a successful hire.", featured:true,
+   t:["Premium service with our full focus on your hiring needs","Full market mapping with regular engagement reports","Access to our existing candidate network","Complimentary review of your current hiring process","Exclusivity of candidates","No extra charge for the increased level of service","Split payments to ease cashflow","Extended 45-day guarantee"]},
+  {k:"Scale", tag:"For periods of growth", for:"A bespoke solution for companies entering an exciting period of growth.", d:"Cost-effective and as agile as you need, from scale bundles and talent on demand to fully embedded solutions. Tell us your story and we'll design the right solution with you.",
+   t:["Hire us as part of your internal people team","Monthly subscription","Talent acquisition strategy","Employer branding","Reporting and metrics","Review of current internal process","EDI objectives","Hire targets and SLA-driven delivery","Scale bundles"]}
+];
+$$("[data-models]").forEach(el => {
+  const full = el.dataset.models === "full";
+  el.innerHTML = MODELS.map(m => `<article class="model rv${m.featured?" featured":""}">
+    <p class="eyebrow">${m.tag}</p><h3>${m.k}</h3><p class="for">${m.for}</p>
+    ${full ? `<p>${m.d}</p><ul class="ticks">${m.t.map(x=>`<li>${x}</li>`).join("")}</ul>` : `<ul class="ticks">${m.t.slice(0,4).map(x=>`<li>${x}</li>`).join("")}</ul>`}
+    <a class="btn${m.featured?" primary":""}" href="${full ? "#contact-us" : "#hiring-solutions"}" ${full?'data-intent="hiring"':""}>${full ? `Talk about ${m.k}` : "Learn more"} ${ARROW}</a>
+  </article>`).join("");
+});
+
+$$("[data-values]").forEach(el => el.innerHTML = VALUES.map(v => `<div class="value"><span class="n">Value</span><h3>${v.k}</h3><p>${v.d}</p></div>`).join(""));
+
+$$("[data-people]").forEach(el => {
+  const detail = el.hasAttribute("data-detail");
+  el.innerHTML = LEADERS.map(p => `<article class="person rv">
+    <div class="portrait"><div class="tint"></div><span class="tbc">Portrait to come</span><span class="ini" aria-hidden="true">${p.ini}</span></div>
+    <h3>${p.name}</h3><p class="role">${p.role}</p>
+    ${detail ? `<p class="mail">${p.email}</p>${p.tel?`<p class="mail">${p.tel}</p>`:""}${p.li?`<p style="margin-top:8px"><a class="link ext" href="${p.li}" target="_blank" rel="noopener">LinkedIn</a></p>`:""}` : ""}
+  </article>`).join("");
+});
+
+$$("[data-quotes]").forEach(el => {
+  const [a,b,c] = QUOTES;
+  const at = q => `<div class="attrib"><b>${q.who}</b><small>${q.what}</small></div>`;
+  el.innerHTML = `<div class="quotes">
+    <blockquote class="qmain rv" style="margin:0"><p>${a.text}</p>${at(a)}</blockquote>
+    <div class="qside">
+      <blockquote class="rv"><p>${b.text}</p>${at(b)}</blockquote>
+      <blockquote class="rv"><span class="eyebrow">Rated positive for</span><div class="tags">${c.tags.map(t=>`<span>${t}</span>`).join("")}</div>${at(c)}</blockquote>
+    </div></div>`;
+});
+
+$$("[data-offices]").forEach(el => {
+  el.innerHTML = OFFICES.map(o => `<div class="office">
+    <span class="eyebrow">${o.cc}</span><span class="city">${o.city}</span>
+    <span class="clock" data-tz="${o.tz}">--:--<small></small></span>
+    ${el.hasAttribute("data-clock-only") ? "" : `<address>${o.addr}</address>${o.tel?`<span class="tel">${o.tel}</span>`:`<span class="muted" style="font-size:.88rem">info@aliumc.com</span>`}`}
+  </div>`).join("");
+});
+$$("[data-locs]").forEach(el => el.innerHTML = OFFICES.map(o => `<div class="loc"><span class="eyebrow">${o.cc}</span><b>${o.city}</b><address>${o.addr}</address>${o.tel?`<span class="tel">${o.tel}</span>`:""}</div>`).join(""));
+$$("[data-socials]").forEach(el => el.innerHTML = SOCIALS.map(([n,u])=>`<a class="link ext" href="${u}" target="_blank" rel="noopener">${n}</a>`).join(""));
+$$("[data-socials-list]").forEach(el => el.innerHTML = SOCIALS.map(([n,u])=>`<li><a class="ext" href="${u}" target="_blank" rel="noopener">${n}</a></li>`).join(""));
+
+$$("[data-fork]").forEach(el => el.innerHTML = `
+  <a href="#vacancies"><span class="eyebrow">For candidates</span><b>I'm looking for work</b><span class="go"><span>Find your next opportunity</span><svg viewBox="0 0 56 56" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 28h46M32 10l18 18-18 18"/></svg></span></a>
+  <a href="#hiring-solutions"><span class="eyebrow">For employers</span><b>I'm hiring talent</b><span class="go"><span>Find your next great hire</span><svg viewBox="0 0 56 56" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 28h46M32 10l18 18-18 18"/></svg></span></a>`);
+
+const coverTint = i => `background:radial-gradient(70% 80% at 80% 20%,${["#BFD3FF","#E3E5EC","#FFD9A8","#D3DFFB"][i%4]},transparent 70%),linear-gradient(160deg,#EEF1F6,#D5DAE5)`;
+function cardHTML(a){
+  const i = ARTICLES.indexOf(a);
+  return `<a class="card rv" href="#insight-${a.slug}">
+    <div class="cover"><div class="tint" style="${coverTint(i)}"></div><canvas data-print="${a.seed}" aria-hidden="true" style="color:var(--ink-fg)"></canvas><span class="tag">${a.tag}</span></div>
+    <div class="meta"><span>${fmtDate(a.date)}</span></div>
+    <h3>${a.title}</h3><p>${a.excerpt}</p></a>`;
+}
+$$('[data-cards="3"]').forEach(el => el.innerHTML = ARTICLES.slice(0,3).map(cardHTML).join(""));
+const allCards = $('[data-cards="all"]');
+function renderList(tag){ allCards.innerHTML = (tag ? ARTICLES.filter(a => a.tag === tag) : ARTICLES.slice(1)).map(cardHTML).join(""); watchMarks(allCards); if (window.__tagDepth) window.__tagDepth(allCards); }
+const f = ARTICLES[0];
+$("#featured").href = "#insight-" + f.slug;
+$("#featured").innerHTML = `<div class="cover" style="aspect-ratio:16/9"><div class="tint" style="${coverTint(0)}"></div><canvas data-print="${f.seed}" aria-hidden="true" style="color:var(--ink-fg)"></canvas><span class="tag">Latest · ${f.tag}</span></div>
+  <div style="display:grid;gap:16px"><div class="meta"><span>${fmtDate(f.date)}</span></div><h3 style="font-size:clamp(1.7rem,3vw,2.8rem);line-height:1.04">${f.title}</h3><p>${f.excerpt}</p><span class="link" style="justify-self:start">Read the insight ${ARROW}</span></div>`;
+const tags = [...new Set(ARTICLES.map(a => a.tag))];
+$("#topicFilters").innerHTML = `<button type="button" aria-pressed="true" data-tag="">All topics</button>` + tags.map(t => `<button type="button" aria-pressed="false" data-tag="${t}">${t}</button>`).join("");
+$("#topicFilters").addEventListener("click", e => {
+  const b = e.target.closest("button"); if (!b) return;
+  $$("#topicFilters button").forEach(x => x.setAttribute("aria-pressed", x === b));
+  $("#featured").hidden = !!b.dataset.tag;
+  renderList(b.dataset.tag);
+});
+renderList("");
+$$("[data-browse]").forEach(el => el.innerHTML = SECTORS.map(s => `<a class="row" href="${sectorUrl(s.id)}" target="_blank" rel="noopener"><span><b>${s.name}</b><small>${s.specs.join(" · ")}</small></span>${ARROW}</a>`).join(""));
+
+/* page-head titles: split into words for a filmic rise */
+$$(".phead h1").forEach(h => { if (h.id === "artTitle") return; const words = h.textContent.trim().split(/\s+/); h.innerHTML = words.map((w,i) => `<span class="w"><span style="--i:${i}">${w}</span></span>`).join(" "); });
+
+/* ---------- Job search (hands off to the live board) ---------- */
+let sector = "";
+function boardUrl(){
+  const p = new URLSearchParams(), q = $("#jq").value.trim(), l = $("#jl").value.trim();
+  if (q) p.set("keyword", q);
+  if (l){ p.set("location", l); p.set("distance", $("#jd").value.replace("km","")); }
+  if (sector) p.set("sector", sector);
+  const s = p.toString(); return BOARD + (s ? "?" + s : "");
+}
+function updateJobs(){
+  $("#jobOpen").href = boardUrl();
+  const q = $("#jq").value.trim(), l = $("#jl").value.trim(), name = sector ? SECTORS.find(s => String(s.id) === sector).name : "";
+  $("#jobMsg").textContent = (q || name || l) ? `Ready: ${[q && `“${q}”`, name && `${name} roles`, l && `near ${l}`].filter(Boolean).join(", ")}.` : "Search our live job board.";
+}
+$$(".filters [data-sector]").forEach(b => b.addEventListener("click", () => { sector = b.dataset.sector; $$(".filters [data-sector]").forEach(x => x.setAttribute("aria-pressed", x === b)); updateJobs(); }));
+["jq","jl","jd"].forEach(id => $("#"+id).addEventListener("input", updateJobs));
+$("#jobSearch").addEventListener("submit", e => { e.preventDefault(); updateJobs(); $("#jobOpen").focus(); $("#jobSub").textContent = "Select “Open job board” to see matching roles, read full descriptions and apply."; });
+
+/* ---------- Contact form ---------- */
+let pendingIntent = null;
+document.addEventListener("click", e => { const a = e.target.closest("[data-intent]"); if (a) pendingIntent = a.dataset.intent; });
+const INTENT_LABEL = {work:"Looking for work", hiring:"Hiring talent", join:"Joining the Alium team", general:"General enquiry"};
+$("#cform").addEventListener("submit", async e => {
+  e.preventDefault();
+  const fm = e.target, errs = [], name = $("#cName"), mail = $("#cMail");
+  [name, mail].forEach(i => i.removeAttribute("aria-invalid"));
+  if ($("#cWeb").value) return;
+  if (!name.value.trim()){ errs.push("Add your name so we know who to reply to."); name.setAttribute("aria-invalid","true"); }
+  if (!/^\S+@\S+\.\S+$/.test(mail.value.trim())){ errs.push("Enter an email address like name@company.com."); mail.setAttribute("aria-invalid","true"); }
+  $("#cErr").textContent = errs.join(" ");
+  if (errs.length){ (fm.querySelector('[aria-invalid="true"]') || name).focus(); return; }
+  const d = Object.fromEntries(new FormData(fm));
+  const text = `Hello Alium,\n\nMy name is ${d.name}${d.company ? ` from ${d.company}` : ""}.\nI'd like to discuss: ${INTENT_LABEL[d.intent]}.\n${d.message ? `\n${d.message}\n` : ""}\nYou can reach me at ${d.email}${d.phone ? ` or on ${d.phone}` : ""}.\n`;
+  if (ALIUM_FORM_ENDPOINT){
+    const btn = $("#cSubmit"); btn.disabled = true;
+    try{
+      const r = await fetch(ALIUM_FORM_ENDPOINT, {method:"POST", headers:{"Content-Type":"application/json"}, body:JSON.stringify(d)});
+      if (!r.ok) throw 0;
+      fm.innerHTML = `<p class="statement" style="font-size:1.6rem">Thank you, ${esc(d.name)}. A specialist will be in touch soon.</p>`; return;
+    }catch{ $("#cErr").textContent = "We couldn't send that just now. Please email info@aliumc.com or try again."; btn.disabled = false; return; }
+  }
+  $("#hoText").textContent = text;
+  $("#hoMail").href = "mailto:info@aliumc.com?subject=" + encodeURIComponent(INTENT_LABEL[d.intent] + " – " + d.name) + "&body=" + encodeURIComponent(text);
+  $("#handoff").hidden = false; $("#hoState").textContent = "";
+  $("#handoff").scrollIntoView({behavior: reduce ? "auto" : "smooth", block:"center"});
+});
+$("#hoCopy").addEventListener("click", () => {
+  const t = $("#hoText").textContent;
+  const sel = () => { const r = document.createRange(); r.selectNodeContents($("#hoText")); const s = getSelection(); s.removeAllRanges(); s.addRange(r); $("#hoState").textContent = "Selected. Press Ctrl/Cmd+C to copy."; };
+  try { navigator.clipboard.writeText(t).then(() => $("#hoState").textContent = "Copied to your clipboard.", sel); } catch { sel(); }
+});
+
+/* ---------- Motion: slow, filmic, scroll-driven ---------- */
+const io = new IntersectionObserver(es => es.forEach(e => {
+  if (!e.isIntersecting) return;
+  e.target.classList.remove("pend"); io.unobserve(e.target);
+  if (e.target.classList.contains("figs")) countUp(e.target);
+}), {rootMargin:"0px 0px -10% 0px"});
+function observeReveals(root=document){
+  if (reduce) return;
+  $$(".rv", root).forEach(el => { const r = el.getBoundingClientRect(); if (r.top > innerHeight*.9){ el.classList.add("pend"); io.observe(el); } });
+}
+const plateIO = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) e.target.classList.add("in"); }), {threshold:.2});
+$$(".plate").forEach(p => plateIO.observe(p));
+function countUp(root){
+  if (reduce) return;
+  $$(".fig b", root).forEach(b => {
+    const m = b.textContent.match(/^(\d+)(.*)$/); if (!m) return;
+    const n = +m[1], suf = m[2], t0 = performance.now();
+    const st = now => { const p = Math.min(1, (now - t0)/1600); b.textContent = Math.round(n*easeIO(p)) + suf; if (p < 1) requestAnimationFrame(st); };
+    requestAnimationFrame(st);
+  });
+}
+const rot = $$("#rot span"); let ri = 0;
+if (!reduce) setInterval(() => { rot[ri].classList.remove("on"); ri = (ri + 1) % rot.length; rot[ri].classList.add("on"); }, 2600);
+function clocks(){
+  $$("[data-tz]").forEach(c => {
+    try{
+      const t = new Intl.DateTimeFormat("en-GB",{hour:"2-digit",minute:"2-digit",timeZone:c.dataset.tz}).format(new Date());
+      const h = +t.slice(0,2);
+      c.firstChild.textContent = t; c.querySelector("small").textContent = h >= 9 && h < 18 ? "Office hours" : "Out of hours";
+    }catch{}
+  });
+}
+clocks(); setInterval(clocks, 30000);
+
+const hdr = $("#hdr"), heroIn = $("#heroIn"), heroBg = $("#heroBg");
+let lastY = scrollY, ticking = false;
+function onScroll(){
+  ticking = false;
+  const y = scrollY, ih = innerHeight;
+  const el = document.elementsFromPoint(innerWidth/2, 38).find(n => n.closest && n.closest("[data-band]") && !n.closest("#hdr"));
+  const band = el && el.closest("[data-band]");
+  hdr.dataset.tone = band ? band.dataset.band : "light";
+  hdr.dataset.solid = y > 30 ? "true" : "false";
+  hdr.dataset.hidden = (y > lastY && y > 500 && !menu.classList.contains("open")) ? "true" : "false";
+  lastY = y;
+  if (reduce) return;
+  if (current === "home" && y < ih*1.2){
+    const p = Math.min(1, y/ih);
+    heroIn.style.transform = `translate3d(0,${(p*90).toFixed(1)}px,0)`;
+    heroIn.style.opacity = (1 - p*1.25).toFixed(3);
+  }
+  $$(".view:not([hidden]) [data-parallax]").forEach(b => {
+    const r = b.parentElement.getBoundingClientRect();
+    if (r.bottom < -100 || r.top > ih + 100) return;
+    const c = r.top + r.height/2 - ih/2;
+    b.style.transform = `translate3d(0,${(-c*+b.dataset.parallax).toFixed(1)}px,0)`;
+  });
+}
+addEventListener("scroll", () => { if (!ticking){ ticking = true; requestAnimationFrame(onScroll); } }, {passive:true});
+addEventListener("resize", onScroll);
+
+/* ---------- Depth: global 3D stage, layered parallax, depth of field ---------- */
+const FOCUS = .62;
+const NUDES = ["#7FA6FF","#FFB45E","#105BFF","#C9CFDD","#FE8500","#A9C0FF","#D8DCE6"];
+const stage = $("#stage"), stageItems = [];
+(() => {
+  const R = rng(4242);
+  for (let i = 0; i < 18; i++){
+    const z = .15 + R()*1.45;                       // .15 = far … 1.6 = near
+    const ring = i % 3 === 2;
+    const el = document.createElement("div"); el.className = ring ? "ring" : "orb";
+    const size = Math.round((ring ? 70 + z*180 : 110 + z*300) * (.7 + R()*.6));
+    const blur = Math.abs(z - FOCUS) * (ring ? 10 : 22);   // depth of field: sharp at the focal plane
+    el.style.width = el.style.height = size + "px";
+    if (!ring) el.style.background = `radial-gradient(circle at 35% 30%, #FFFFFF 0%, ${NUDES[i % NUDES.length]} 45%, transparent 70%)`;
+    if (blur > .8) el.style.filter = `blur(${blur.toFixed(1)}px)`;
+    el.style.opacity = (ring ? .3 + (1 - Math.min(1, Math.abs(z - FOCUS)))*.5 : .22 + Math.min(.3, z*.2)).toFixed(2);
+    stage.appendChild(el);
+    stageItems.push({el, z, size, x: R(), y: R(), ph: R()*6.28});
+  }
+  [3, 9, 15].forEach((seed, k) => {
+    const cv = document.createElement("canvas"); cv.className = "orb"; cv.dataset.print = 900 + seed;
+    const size = 150 + k*50; cv.style.width = cv.style.height = size + "px"; cv.style.color = "#21232E"; cv.style.opacity = ".14";
+    stage.appendChild(cv); stageItems.push({el: cv, z: FOCUS + (k-1)*.06, size, x: .12 + k*.36, y: .18 + k*.29, ph: k});
+  });
+  watchMarks(stage);
+})();
+function wrapLayer(el, z){ const w = document.createElement("div"); w.className = "layer"; w.dataset.z = z; el.parentNode.insertBefore(w, el); w.appendChild(el); return w; }
+function addOrb(host, before, z, size, x, y, color){
+  const w = document.createElement("div"); w.className = "layer"; w.dataset.z = z;
+  const o = document.createElement("div"); o.className = "lorb";
+  const blur = Math.abs(z - FOCUS)*28;
+  o.style.cssText = `width:${size};aspect-ratio:1;left:${x};top:${y};background:radial-gradient(circle at 35% 30%,#FFFFFF 0%,${color} 48%,transparent 70%);${blur > 1 ? `filter:blur(${blur.toFixed(1)}px);` : ""}opacity:.5;animation-duration:${(13 + Math.random()*9).toFixed(1)}s;animation-delay:-${(Math.random()*20).toFixed(1)}s`;
+  w.appendChild(o); host.insertBefore(w, before); return w;
+}
+$$(".hero .light").forEach(e => wrapLayer(e, .25));
+$$(".hero canvas.mark, .phead canvas.mark").forEach(e => wrapLayer(e, .55));
+$$(".phead .bg").forEach(e => wrapLayer(e, .15));
+$$(".plate-bg canvas").forEach(e => wrapLayer(e, .45));
+const heroBgEl = $("#heroBg");
+addOrb(heroBgEl, heroBgEl.firstChild, .2, "44vw", "48%", "-8%", "#A9C0FF");
+addOrb(heroBgEl, $(".hero .vignette"), 1.5, "24vw", "4%", "58%", "#FFB45E");
+addOrb(heroBgEl, $(".hero .vignette"), 1.1, "9vw", "86%", "64%", "#105BFF");
+$$(".phead").forEach((ph, i) => { const w = ph.querySelector(".wrap"); addOrb(ph, w, .3, "34vw", i%2 ? "6%" : "58%", "-10%", NUDES[i % NUDES.length]); addOrb(ph, w, 1.35, "16vw", i%2 ? "84%" : "2%", "62%", NUDES[(i+3) % NUDES.length]); });
+$$(".plate").forEach((pl, i) => addOrb(pl.querySelector(".plate-bg"), pl.querySelector(".plate-bg .vignette"), 1.3, "20vw", i%2 ? "70%" : "4%", "10%", NUDES[(i+2) % NUDES.length]));
+
+const DEPTH = [[".head",.06],[".statement",.1],[".figs",-.05],[".plate-in > div:first-child",.14],[".plate-in > div:last-child",-.05],
+  [".people .person:nth-child(even)",.1],[".people .person:nth-child(odd)",-.03],[".cards .card:nth-child(3n+2)",.08],[".cards .card:nth-child(3n+1)",-.02],
+  [".models .model:nth-child(2)",.07],[".qmain",.06],[".qside",-.05],[".fork b",.12],[".phead h1",-.1],[".phead .lede",-.05],
+  [".values",.04],[".offices",-.03],[".benefits",.04],[".steps",.03],[".also",-.04],["#featured",.03]];
+const TILT = ".model, .card .cover, .portrait, .search, .cform, .result, .figs, .values, #featured .cover";
+const depthLive = new Set(), hostLive = new Set();
+const dIO = new IntersectionObserver(es => es.forEach(e => e.isIntersecting ? depthLive.add(e.target) : depthLive.delete(e.target)), {rootMargin:"25% 0px"});
+const hIO = new IntersectionObserver(es => es.forEach(e => e.isIntersecting ? hostLive.add(e.target) : hostLive.delete(e.target)), {rootMargin:"10% 0px"});
+function tagDepth(root=document){
+  if (reduce) return;
+  DEPTH.forEach(([sel, f]) => $$(sel, root).forEach(el => { if (el.dataset.depth == null){ el.dataset.depth = f; dIO.observe(el); } }));
+  $$(TILT, root).forEach(el => { if (!el.hasAttribute("data-tilt3d")){ el.setAttribute("data-tilt3d", ""); dIO.observe(el); } });
+}
+window.__tagDepth = tagDepth;
+tagDepth();
+$$(".hero, .phead, .plate").forEach(h => { h._layers = $$(".layer", h); hIO.observe(h); });
+
+let ptx = 0, pty = 0, sx = 0, sy = 0, dvel = 0, dPrevY = scrollY;
+addEventListener("pointermove", e => { ptx = e.clientX/innerWidth - .5; pty = e.clientY/innerHeight - .5; }, {passive:true});
+function depthFrame(t){
+  requestAnimationFrame(depthFrame);
+  if (document.hidden) return;
+  const y = scrollY, ih = innerHeight, iw = innerWidth;
+  dvel += ((y - dPrevY) - dvel)*.1; dPrevY = y;
+  sx += (ptx - sx)*.06; sy += (pty - sy)*.06;
+  // 1. global stage: every form moves at its own depth; near forms travel further and sit closer in 3D
+  const span = ih*1.7 + 500;
+  stageItems.forEach(it => {
+    const tt = t*.001, rad = 40 + it.z*80;
+    // continuous ambient life: a slow upward current, looping orbits and breathing scale
+    let yy = ((it.y*span - y*it.z*.6 - tt*(12 + it.z*18)) % span + span) % span - 250;
+    const xx = it.x*iw*1.1 - it.size/2 + sx*it.z*90 + Math.sin(tt*(.3 + it.z*.14) + it.ph)*rad;
+    yy += sy*it.z*60 + Math.cos(tt*(.24 + it.z*.1) + it.ph*1.3)*rad*.7 - it.size/2;
+    const sc = 1 + Math.sin(tt*.55 + it.ph*2)*.14;
+    const rot = it.el.tagName === "CANVAS" ? ` rotate(${(tt*7 + it.ph*40).toFixed(1)}deg)` : "";
+    it.el.style.transform = `translate3d(${xx.toFixed(1)}px,${yy.toFixed(1)}px,${((it.z - FOCUS)*280).toFixed(0)}px) scale(${sc.toFixed(3)})${rot}`;
+  });
+  stage.style.transform = `rotateX(${(-sy*5 - Math.max(-4, Math.min(4, dvel*.08))).toFixed(2)}deg) rotateY(${(sx*6).toFixed(2)}deg)`;
+  // 2. layered scenes (hero, page heads, sector plates)
+  hostLive.forEach(h => {
+    if (!h.offsetParent) return;
+    const top = h.getBoundingClientRect().top;
+    h._layers.forEach(l => { const z = +l.dataset.z; l.style.transform = `translate3d(${(sx*z*70).toFixed(1)}px,${(-top*z*.3 + sy*z*46).toFixed(1)}px,0)`; });
+  });
+  // 3. content depth + 3D entry tilt (read all, then write all)
+  const jobs = [];
+  depthLive.forEach(el => { if (el.offsetParent) jobs.push([el, el.getBoundingClientRect()]); });
+  jobs.forEach(([el, r]) => {
+    const prev = el._ty || 0, c = (r.top - prev) + r.height/2 - ih/2;
+    let tf = "";
+    if (el.dataset.depth != null){ el._ty = -c*+el.dataset.depth; tf = `translate3d(0,${el._ty.toFixed(1)}px,0)`; }
+    if (el.hasAttribute("data-tilt3d")){ const q = Math.max(-1, Math.min(1, c/ih)); tf = `perspective(1200px) ${tf} rotateX(${(q*10).toFixed(2)}deg) rotateY(${(sx*4).toFixed(2)}deg)`; }
+    el.style.transform = tf;
+  });
+}
+if (!reduce) requestAnimationFrame(depthFrame);
+else { const span = innerHeight*1.7; stageItems.forEach(it => it.el.style.transform = `translate3d(${(it.x*innerWidth - it.size/2).toFixed(0)}px,${(it.y*span - 250).toFixed(0)}px,0)`); }
+
+/* ---------- Menu ---------- */
+const menu = $("#menu");
+function setMenu(open){
+  menu.classList.toggle("open", open);
+  $("#menuBtn").setAttribute("aria-expanded", open);
+  document.body.style.overflow = open ? "hidden" : "";
+  if (open) setTimeout(() => $("#menuClose").focus(), 60); else $("#menuBtn").focus({preventScroll:true});
+}
+$("#menuBtn").addEventListener("click", () => setMenu(true));
+$("#menuClose").addEventListener("click", () => setMenu(false));
+menu.addEventListener("click", e => { if (e.target.closest("a")) setMenu(false); });
+menu.addEventListener("keydown", e => {
+  if (e.key === "Escape") setMenu(false);
+  if (e.key === "Tab"){ const fo = $$("a,button", menu), i = fo.indexOf(document.activeElement);
+    if (e.shiftKey && i <= 0){ e.preventDefault(); fo[fo.length-1].focus(); } else if (!e.shiftKey && i === fo.length-1){ e.preventDefault(); fo[0].focus(); } }
+});
+
+/* ---------- Router ---------- */
+const TITLES = {"home":"Alium · Specialist recruitment","about-us":"About us · Alium","areas-of-expertise":"Areas of expertise · Alium","hiring-solutions":"Hiring solutions · Alium","vacancies":"Vacancies · Alium","join-us":"Join the team · Alium","insights":"Insights · Alium","contact-us":"Contact us · Alium"};
+let current = null, first = true;
+function renderArticle(a){
+  $("#artTitle").textContent = a.title; $("#artTag").textContent = a.tag; $("#artDate").textContent = fmtDate(a.date);
+  $("#artBody").innerHTML = a.body;
+  const m = $("#artMark"); m.dataset.print = a.seed; if (!m._w){ m._w = 1; ro.observe(m); } else drawMark(m);
+  const rel = $("#related"); rel.innerHTML = ARTICLES.filter(x => x !== a).slice(0,3).map(cardHTML).join(""); watchMarks(rel); tagDepth(rel);
+}
+function route(){
+  const h = decodeURIComponent(location.hash.slice(1)) || "home";
+  if (h === "main") return;
+  let view = h, art = null;
+  if (h.startsWith("insight-")){ art = ARTICLES.find(a => "insight-" + a.slug === h); view = art ? "article" : "insights"; }
+  if (!$(`[data-view="${view}"]`)) view = "home";
+  const swap = () => {
+    $$(".view").forEach(v => v.hidden = v.dataset.view !== view);
+    const vEl = $(`[data-view="${view}"]`);
+    if (art) renderArticle(art);
+    document.title = art ? art.title + " · Alium" : TITLES[view];
+    const navKey = "#" + (view === "article" ? "insights" : view);
+    $$(".nav a, .menu nav a").forEach(a => a.getAttribute("href") === navKey ? a.setAttribute("aria-current","page") : a.removeAttribute("aria-current"));
+    if (view === "contact-us" && pendingIntent){ const r = $(`#cform input[name=intent][value="${pendingIntent}"]`); if (r) r.checked = true; }
+    pendingIntent = null;
+    scrollTo(0,0);
+    watchMarks(vEl); observeReveals(vEl);
+    if (!first){ const h1 = vEl.querySelector("h1"); if (h1){ h1.setAttribute("tabindex","-1"); h1.focus({preventScroll:true}); } }
+    current = view; onScroll(); first = false;
+    $("#fade").classList.remove("on");
+  };
+  if (first || reduce){ swap(); return; }
+  $("#fade").classList.add("on"); setTimeout(swap, 330);
+}
+addEventListener("hashchange", route);
+document.addEventListener("click", e => { const a = e.target.closest('a[href^="#"]'); if (a && a.getAttribute("href") === location.hash && a.getAttribute("href") !== "#main"){ e.preventDefault(); scrollTo({top:0, behavior: reduce ? "auto" : "smooth"}); } });
+$("#yr").textContent = new Date().getFullYear();
+watchMarks(document);
+route();
+})();
+</script>
+
+</body>
+</html>
